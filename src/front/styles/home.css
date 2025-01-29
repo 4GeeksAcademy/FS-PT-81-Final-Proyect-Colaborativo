@@ -149,6 +149,9 @@
     text-decoration: underline;
   }
 /* NAVBAR */
+  .logonavbar{
+    height: 6rem;
+  }
 
   .navbar {
     background-color: #2C5364;
@@ -158,8 +161,7 @@
     justify-content: space-between;
     color: white;
   }
-  
- 
+
   .btn-green {
     background-color: #28a745; 
     color: white;
@@ -212,21 +214,36 @@
   margin:0;
   padding: 0;
   /*font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;*/
-  /*background-image: url("https://clinicalarriba.es/wp-content/uploads/2018/04/Slider1.jpg");*/
-  background-color: #2C5364;
+  background-image: url("https://clinicalarriba.es/wp-content/uploads/2018/04/Slider1.jpg");
+  /*background-color: #2C5364;*/
   height: 30vh;
   background-size: cover;
   background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
-
   color:#4286F4;
   border-radius: 0px!important;
 }
 .jumbotron_h1{
   margin: 0;
-  /*padding: 0;*/
+  padding: 0 1rem 0 1rem;
+  font-size: 4rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: bolder;
+  /*background-color: rgba(61, 79, 195, 0.8);*/
+  background-color: #007bff;
+  
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+  text-align: center; 
+}
+
+.divdelfondo{
+  background-color: #2C5364;
+  margin: 0;
+  padding: 0 0 2rem 0;
   font-size: 4rem;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   line-height: 1.5;
@@ -235,6 +252,7 @@
   color: #ffffff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
   text-align: center; 
+
 }
 
 .card_container{
@@ -257,6 +275,9 @@
 .btn-custom:hover {
   background-color: #004494; 
 }
+
+
+
 /*Titulo de especialidades*/
 .title {
   display: flex;
@@ -269,3 +290,100 @@
   width: 80%; 
   margin: 20px auto;
 }
+
+.btn-especial {
+  background-color: #007bff; /* Azul más moderno */
+  color: white;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 8px;
+  font-size: 1.4rem; /* Mayor tamaño de fuente */
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  outline: none;
+  will-change: transform, background-color, box-shadow;
+}
+
+.btn-especial:hover {
+  background-color: #0056b3; /* Color azul más oscuro */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-especial:focus {
+  outline: 3px solid #99c2ff; /* Azul claro para el foco */
+  outline-offset: 2px;
+}
+
+.btn-especial:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/*
+
+.btn-especial {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  outline: none;
+  will-change: transform, background-color, box-shadow;
+}
+
+.btn-especial:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-especial:focus {
+  outline: 3px solid #80d5a4;
+  outline-offset: 2px;
+}
+
+.btn-especial:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-especial {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-especial:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-especial:active {
+  transform: scale(1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+*/

@@ -10,8 +10,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 api = Blueprint('api', __name__)
 
+
 # Allow CORS requests to this API
-CORS(api)
+CORS(api, origins="https://verbose-guide-wr9v5p7rvqvgf566r-3000.app.github.dev", methods=["GET", "POST", "PUT", "DELETE"], allow_headers=["Content-Type"])
 
 
 @api.route('/users', methods=['GET'])
@@ -265,16 +266,15 @@ def login():
     if not email or not password:
         return jsonify({"msg": "missing data"}), 400
     exist = Users.query.filter_by(email=email).first()
-    if exist:
-        return jsonify({"msg": "no user found"}), 404
+    if not exist:
+        return jsonify({"msg": "user doesnt exist"}), 400
     
-
-    hashed_password = generate_password_hash(password)
     if check_password_hash(exist.password, password):
+        token = create_access_token(identity=exist.id)
+        return jsonify({"msg": 'ok', 'token': token, "user":exist.serialize()})
+    else:
+   
         return jsonify({"msg":"email/password wrong"})
-
-    token = create_access_token(identity=exist.id)
-    return jsonify({"msg": 'ok', 'token': token})
 
 @api.route('/protected', methods=['GET'])
 @jwt_required()

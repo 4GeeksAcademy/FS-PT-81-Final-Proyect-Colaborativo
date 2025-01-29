@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext.js"
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import { useNavigate } from "react-router-dom";
 
 export const Formulary = () => {
+  const {store,actions} = useContext(Context)
+  const navigate = useNavigate()
     const [formData, setFormData] = useState({
       name: "",
       lastname: "",
@@ -18,6 +20,7 @@ export const Formulary = () => {
   
     const handleSubmit = (e) => {
       e.preventDefault();
+      if (actions.register(formData)) navigate("/doctors")
       console.log("User registered:", formData);
     };
   

@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
-from api.models import db, Users
+from api.models import db
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
@@ -18,10 +18,8 @@ ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
-app.config['SECRET KEY'] = os.getenv('JWT SECRET KEY')
-jwt = JWTManager(app)
 app.url_map.strict_slashes = False
-
+jwt=JWTManager(app)
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
 if db_url is not None:
@@ -52,6 +50,21 @@ def handle_invalid_usage(error):
 
 # generate sitemap with all your endpoints
 
+@app.route('/api/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    # Lógica de autenticación aquí
+    if email == "test@example.com" and password == "password":
+        return jsonify({
+            "message": "Login successful",
+            "token": "fake-jwt-token",
+            "user": {"id": 1, "email": email}
+        }), 200
+    else:
+        return jsonify({"message": "Invalid credentials"}), 401
 
 @app.route('/')
 def sitemap():
