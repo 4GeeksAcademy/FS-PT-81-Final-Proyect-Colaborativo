@@ -6,17 +6,16 @@ import "../../styles/home.css";
 
 
 
-const handleAgendarCita = () => {
-	navigate("/cita");
-};
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-
+	const navigate = useNavigate()
+	const handleAgendarCita = () => 
+		navigate("/doctors");
 	return (
 		<>
 			<div className="jumbotron jumbotron_div">
-				<h1 className="jumbotron_h1">BIENVENIDO A CLINICA CENTRAL</h1>
+				<h1 className="jumbotron_h1">BIENVENIDO A X</h1>
 			</div>
 			{/*
 			<hr className="lineas"></hr>
@@ -25,44 +24,60 @@ export const Home = () => {
 			*/}
 			<div className="container-fluid">
 				<div className="row">
-					<div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 d-flex justify-content-center card_container">
+					<div className="col-sm-12 col-md-12 col-lg-6 col-xl-3 col-xxl-3 d-flex justify-content-center card_container">
 						<div className="card">
 							<img src="https://sanicur.es/wp-content/uploads/2024/05/admin-ajax-2.jpg" className="card-img-top" alt="DRACLARAFUENTES" />
 							<div className="card-body">
-								<p className="card-text">MEDICINA INTEGRAL</p>
-								<p>Somos un equipo de médicos que brinda atención integral, 
-									garantizando el bienestar de toda la familia en cada etapa de la vida.</p>
+								<p className="card-text">LAVADERO</p>
+								<p>TE LAVAMOS LA ROPA</p>
+								<div class="d-grid gap-2 col-12 mx-auto">
+									<button className="btn-especial" onClick={handleAgendarCita}>
+										AGENDAR CITA
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 d-flex justify-content-center card_container">
+					<div className="col-sm-12 col-md-12 col-lg-6 col-xl-3 col-xxl-3 d-flex justify-content-center card_container">
 						<div className="card">
-						<img src="https://sanicur.es/wp-content/uploads/2024/05/male-physiotherapist.jpg" className="card-img-top" alt="DRACLARAFUENTES" />
+							<img src="https://sanicur.es/wp-content/uploads/2024/05/male-physiotherapist.jpg" className="card-img-top" alt="DRACLARAFUENTES" />
 							<div className="card-body">
-								<p className="card-text">REHABILITACION</p>
-								<p>Desarrollamos terapias en rehabilitación funcional y manejo del dolor, 
-									enfocadas en recuperar la movilidad y optimizar el bienestar.</p>
+								<p className="card-text">MASAJES</p>
+								<p>TE HACEMOS MASAJES</p>
+								<div class="d-grid gap-2 col-12 mx-auto">
+									<button className="btn-especial" onClick={handleAgendarCita}>
+										AGENDAR CITA
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 d-flex justify-content-center card_container">
+					<div className="col-sm-12 col-md-12 col-lg-6 col-xl-3 col-xxl-3 d-flex justify-content-center card_container">
 						<div className="card">
 							<img src="https://sanicur.es/wp-content/uploads/2024/05/doctor-diagnoses-treats-virtual-humanology.jpg"
-							 className="card-img-top" alt="DRACLARAFUENTES" />
+								className="card-img-top" alt="DRACLARAFUENTES" />
 							<div className="card-body">
-								<p className="card-text">TECNOLOGIA</p>
-								<p>Equipados con tecnología médica de última generación, 
-									diseñados para proporcionar atención de alta calidad y precisión.</p>
+								<p className="card-text">PELUQUERIA</p>
+								<p>TE PINTAMOS EL PELO</p>
+								<div class="d-grid gap-2 col-12 mx-auto">
+									<button className="btn-especial" onClick={handleAgendarCita}>
+										AGENDAR CITA
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div className="col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3 d-flex justify-content-center card_container">
+					<div className="col-sm-12 col-md-12 col-lg-6 col-xl-3 col-xxl-3 d-flex justify-content-center card_container">
 						<div className="card">
 							<img src="https://sanicur.es/wp-content/uploads/2024/05/female-psychologist.jpg" className="card-img-top" alt="DRACLARAFUENTES" />
 							<div className="card-body">
-								<p className="card-text">HUMANIDAD</p>
-								<p>Consideramos la medicina como una vocación. 
-									No tratamos clientes, sino personas, a quienes cuidamos como familia.</p>
+								<p className="card-text">UÑAS</p>
+								<p>TE ARRANCAMOS LAS UÑAS</p>
+								<div class="d-grid gap-2 col-12 mx-auto">
+									<button className="btn-especial" onClick={handleAgendarCita}>
+										AGENDAR CITA
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -70,13 +85,8 @@ export const Home = () => {
 				<div>
 					<div className="d-flex flex-column justify-content-center align-items-center my-4 divdelfondo">
 						<div className="d-flex flex-column justify-content-center align-items-center my-4">
-							<h1>AGENDE SU CITA EN CLINICA CENTRAL</h1>
+							<h1>AGENDE SU CITA EN X</h1>
 							<h3>De manera rápida, sencilla y segura</h3>
-						</div>
-						<div class="d-grid gap-2 col-3 mx-auto">
-						<button className="btn-especial" onClick={handleAgendarCita}>
-						AGENDAR CITA
-						</button>
 						</div>
 					</div>
 				</div>

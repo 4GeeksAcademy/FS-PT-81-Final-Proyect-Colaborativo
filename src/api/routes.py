@@ -12,7 +12,7 @@ api = Blueprint('api', __name__)
 
 
 # Allow CORS requests to this API
-CORS(api, origins="https://verbose-guide-wr9v5p7rvqvgf566r-3000.app.github.dev", methods=["GET", "POST", "PUT", "DELETE"], allow_headers=["Content-Type"])
+CORS(api, origins="https://stunning-space-sniffle-jj4rjww9gggx2q9v9-3000.app.github.dev", methods=["GET", "POST", "PUT", "DELETE"], allow_headers=["Content-Type"])
 
 
 @api.route('/users', methods=['GET'])

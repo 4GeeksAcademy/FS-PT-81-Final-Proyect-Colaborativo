@@ -8,15 +8,22 @@ export const Navbar = () => {
 
   const navigate = useNavigate();
 
-  const handlePruebaYa = () => {
+  const handleLogin = () => {
     navigate("/login");
   }
+  
+  const handleSignUp = () =>{
+    navigate("/registro");
+  }
+  
+
+  
 
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid justify-content-start mx-5">
-        <a className="navbar-brand" href="#"><img src={ logonavbar } alt="CLINICA CENTRAL" className="logonavbar" /></a>
+        <a className="navbar-brand" href="#"><img src={logonavbar} alt="CLINICA CENTRAL" className="logonavbar" /></a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -35,9 +42,8 @@ export const Navbar = () => {
               <a className="nav-link navbarcoso" href="#">ELEMENTO 4</a>
             </li>
           </ul>
-          {localStorage.getItem("token") ? <button onClick={() => navigate("/doctors")} className="btn btn-outline-primary botonnavbar">AGENDAR CITA</button> :
-            <button onClick={handlePruebaYa} className="btn-especial">INICIAR SESION</button>
-          }
+          <button className="btn btn-outline-primary mx-1" onClick={handleLogin}>Iniciar Sesion</button>
+          <button className="btn btn-outline-primary" onClick={handleSignUp}>Registro</button>
         </div>
       </div>
     </nav>
