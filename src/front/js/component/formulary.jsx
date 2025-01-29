@@ -24,9 +24,6 @@ export const Formulary = () => {
       console.log("User registered:", formData);
     };
 
-    const handleSignedUp = () => {
-      navigate("/");
-    } 
     return (
       <form className="custom-register-form" onSubmit={handleSubmit}>
         <h1 className="justify-content-center">Registro</h1>
@@ -78,7 +75,7 @@ export const Formulary = () => {
             required
           />
         </div>
-        <button type="submit" className="custom-register-button" onClick={handleSignedUp}>
+        <button type="submit" className="custom-register-button" onClick={handleSubmit}>
           Registrarme
         </button>
         <p className="form-footer">
