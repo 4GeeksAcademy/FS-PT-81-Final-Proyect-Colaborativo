@@ -13,6 +13,7 @@ import { Login } from "./pages/login.jsx";
 import  Cita  from "./pages/cita.jsx";
 import  {Calendars} from "./component/calendar.js";
 import { DoctorCards } from "./component/doctorCard.js";
+import { RegistroEmpresas } from "./pages/registroEmpresa.jsx";
 
 
 
@@ -32,6 +33,7 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<Registro />} path="/registro" />
+                        <Route element={<RegistroEmpresas />} path="/registroEmpresas" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Cita />} path="/cita" />
                         <Route element={<Calendars />} path="/calendar/:doctorId" />
