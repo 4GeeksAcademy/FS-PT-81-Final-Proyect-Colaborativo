@@ -24,6 +24,9 @@ export const Formulary = () => {
       console.log("User registered:", formData);
     };
 
+    const handleSignedUp = () => {
+      navigate("/elegir");
+    } 
     return (
       <form className="custom-register-form" onSubmit={handleSubmit}>
         <h1 className="justify-content-center">Registro</h1>

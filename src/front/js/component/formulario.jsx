@@ -64,7 +64,7 @@ export const Formulario = () => {
       </button>
       <p className="footer-login">
         ¿No tienes cuenta?{" "}
-        <a href="/registro" className="link">
+        <a href="/elegir" className="link">
           Regístrate aquí
         </a>
       </p>

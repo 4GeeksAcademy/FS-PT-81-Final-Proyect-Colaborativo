@@ -2,7 +2,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import logonavbar from "../../img/3.png";
+import logonavbar from "../../img/agenpro.png";
 
 export const Navbar = () => {
 
@@ -23,7 +23,7 @@ export const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid justify-content-start mx-5">
-        <a className="navbar-brand" href="#"><img src={logonavbar} alt="CLINICA CENTRAL" className="logonavbar" /></a>
+        <a className="navbar-brand" href="/"><img src={logonavbar} alt="CLINICA CENTRAL" className="logonavbar" /></a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

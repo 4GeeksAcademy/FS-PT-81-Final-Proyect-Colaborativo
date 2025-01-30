@@ -5,31 +5,27 @@ import "../../styles/doctorCard.css";
 const doctors = [
     {
         id: 1,
-        name: "Dr. Ivan Herrera",
-        especialidad: "Cardiología",
-        title: "Médico Cirujano",
-        descripcion: "Especialista en Cardiología",
+        name: "Look&Chic",
+        especialidad: "Peluqueria",
+        descripcion: "Especialistas en cuidarte",
     },
     {
         id: 2,
-        name: "Dr. Maria Gómez",
-        especialidad: "Dermatología",
-        title: "Médico Dermatólogo",
-        descripcion: "Especialista en Dermatología",
+        name: "AutoBrillante",
+        especialidad: "Lavado de coches",
+        descripcion: "Especialistas en dar cera y pulir cera",
     },
     {
         id: 3,
-        name: "Dr. José Pérez",
-        especialidad: "Neurología",
-        title: "Médico Neurólogo",
-        descripcion: "Especialista en Neurología",
+        name: "Nail Art Studio",
+        especialidad: "Uñas",
+        descripcion: "Especialistas en uñas",
     },
     {
         id: 4,
-        name: "Dr. Laura Martínez",
-        especialidad: "Pediatría",
-        title: "Médico Pediatra",
-        descripcion: "Especialista en Pediatría",
+        name: "Relajarte Spa",
+        especialidad: "Masajes",
+        descripcion: "Especialistas en masajes y relajacion",
     },
 ];
 

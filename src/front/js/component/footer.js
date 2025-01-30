@@ -15,7 +15,6 @@ export const Footer = () => (
             <li className="nav-item"><a className="nav-link" href="#"> Términos y Condiciones </a>
             </li>
           </ul>
-          <button className="btn-especial">Contáctanos</button>
         </div>
       </div>
     </footer>
