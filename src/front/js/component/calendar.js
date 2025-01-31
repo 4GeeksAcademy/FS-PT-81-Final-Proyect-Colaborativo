@@ -13,7 +13,7 @@ export const Calendars = () => {
   const [selectedMinute, setSelectedMinute] = useState("00");
   const [events, setEvents] = useState([]);
   const [appointmentConfirmed, setAppointmentConfirmed] = useState(false);
-
+  const [uri, setUri] = useState('')
   // Definimos las franjas horarias disponibles
   const availableHours = [
     { start: 9, end: 13 },
@@ -87,9 +87,82 @@ export const Calendars = () => {
     onProfilePageViewed: () => console.log("onProfilePageViewed"),
     onDateAndTimeSelected: () => console.log("onDateAndTimeSelected"),
     onEventTypeViewed: () => console.log("onEventTypeViewed"),
-    onEventScheduled: (e) => console.log(e.data.payload),
+    onEventScheduled: (e) => setUri(e.data.payload.event.uri),
     onPageHeightResize: (e) => console.log(e.data.payload.height),
   });
+
+
+   
+    
+  // evento onEventScheduled  
+  //  {
+  //     "event": {
+  //         "uri": "https://api.calendly.com/scheduled_events/e62f560b-528a-4775-bc00-d59c76063cbd" ---> direccion para traerte con el fetch la info del evento
+  //     },
+  //     "invitee": {
+  //         "uri": "https://api.calendly.com/scheduled_events/e62f560b-528a-4775-bc00-d59c76063cbd/invitees/0113934e-ef62-482a-84ae-7c27febb9f92"
+  //     }
+  // }
+
+
+  /*
+respuesta cuando pides info del https://api.calendly.com/scheduled_events/uri
+{
+    "resource": {
+        "calendar_event": {
+            "external_id": "u4p38pumeleerecu60034v2bqg",
+            "kind": "google"
+        },
+        "created_at": "2025-01-31T11:01:39.216399Z",
+        "end_time": "2025-02-14T18:30:00.000000Z",
+        "event_guests": [],
+        "event_memberships": [
+            {
+                "buffered_end_time": "2025-02-14T18:30:00.000000Z",
+                "buffered_start_time": "2025-02-14T18:00:00.000000Z",
+                "user": "https://api.calendly.com/users/1a9b9948-ca53-41b4-9275-ef74c2c19a69",
+                "user_email": "ivanperezgonzalez123@gmail.com",
+                "user_name": "Ivan 075"
+            }
+        ],
+        "event_type": "https://api.calendly.com/event_types/23112707-5c76-4743-9641-d4af77ad7555",
+        "invitees_counter": {
+            "active": 1,
+            "limit": 1,
+            "total": 1
+        },
+        "location": {
+            "additional_info": "",
+            "location": "Madrid, 123",
+            "type": "physical"
+        },
+        "meeting_notes_html": null,
+        "meeting_notes_plain": null,
+        "name": "Date Update",
+        "start_time": "2025-02-14T18:00:00.000000Z",
+        "status": "active",
+        "updated_at": "2025-01-31T11:01:40.487815Z",
+        "uri": "https://api.calendly.com/scheduled_events/7ba71438-cdd7-4331-9a4c-a559ce4e8ee3"
+    }
+}
+  */
+useEffect(()=>{
+
+const options = {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + process.env.CALENDLY_TOKEN
+//    Authorization: 'Bearer eyJraWQiOiIxY2UxZTEzNjE3ZGNmNzY2YjNjZWJjY2Y4ZGM1YmFmYThhNjVlNjg0MDIzZjdjMzJiZTgzNDliMjM4MDEzNWI0IiwidHlwIjoiUEFUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2F1dGguY2FsZW5kbHkuY29tIiwiaWF0IjoxNzM4MzIwODg0LCJqdGkiOiIwYWQ0NGIwNy04Mjg5LTQwYmEtOTA0Ny0zODhmYTU5NGFlMzAiLCJ1c2VyX3V1aWQiOiI2NDE0ODQzNy1jNThmLTQ2NzAtODY4Mi05YjMyZTZkMTBkODAifQ.ZEBxjnaqBswVW0NIZVq7LvvePEg_-SptzO2lEq9NOlG7UBM_9Ocxe8nY857Zavh0fJj4FSQ5hnjC8oROMuvRNg'
+  }
+};
+
+    fetch(uri, options)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(err => console.error(err));
+  },[uri])
+
 
   return (
     <>
