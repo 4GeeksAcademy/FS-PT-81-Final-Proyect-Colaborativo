@@ -15,6 +15,7 @@ import  {Calendars} from "./component/calendar.js";
 import { DoctorCards } from "./component/doctorCard.js";
 import { RegistroEmpresas } from "./pages/registroEmpresa.jsx";
 import { BotonElegir } from "./pages/botonElegir.jsx";
+import { PerfilCliente } from "./pages/perfilCliente.jsx";
 
 
 
@@ -38,6 +39,7 @@ const Layout = () => {
                         <Route element={<RegistroEmpresas />} path="/registroEmpresas" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Cita />} path="/cita" />
+                        <Route element={<PerfilCliente />} path="/perfilcliente" />
                         <Route element={<Calendars />} path="/calendar/:doctorId" />
                         <Route element={<DoctorCards />}  path="/doctors" />
                         <Route element={<h1>Not found!</h1>} />
