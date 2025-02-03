@@ -6,6 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { DoctorCards } from "./doctorCard";
 import "../../styles/calendar.css";
 
+/* 
 export const Calendars = () => {
   // Estado para manejar la fecha y hora seleccionadas
   const [selectedDate, setSelectedDate] = useState(null);
@@ -14,7 +15,11 @@ export const Calendars = () => {
   const [events, setEvents] = useState([]);
   const [appointmentConfirmed, setAppointmentConfirmed] = useState(false);
   const [uri, setUri] = useState('')
+  const [appointmentData, setAppointmentData] = useState(null);
+
   // Definimos las franjas horarias disponibles
+  
+  
   const availableHours = [
     { start: 9, end: 13 },
     { start: 16, end: 20 }
@@ -28,7 +33,7 @@ export const Calendars = () => {
   // Generar las horas y minutos disponibles basados en las franjas horarias
   const generateAvailableTimes = () => {
     const availableTimes = [];
-    
+
     availableHours.forEach((slot) => {
       for (let hour = slot.start; hour < slot.end; hour++) {
         availableTimes.push(`${hour < 10 ? `0${hour}` : hour}:00`);
@@ -92,8 +97,8 @@ export const Calendars = () => {
   });
 
 
-   
-    
+
+
   // evento onEventScheduled  
   //  {
   //     "event": {
@@ -144,34 +149,177 @@ respuesta cuando pides info del https://api.calendly.com/scheduled_events/uri
         "updated_at": "2025-01-31T11:01:40.487815Z",
         "uri": "https://api.calendly.com/scheduled_events/7ba71438-cdd7-4331-9a4c-a559ce4e8ee3"
     }
-}
-  */
-useEffect(()=>{
 
-const options = {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + process.env.CALENDLY_TOKEN
+  
+    export const CalendlyFetch = ({ uri, userId }) => {
+      const [appointmentData, setAppointmentData] = useState(null);
+    
+      useEffect(() => {
+        if (!uri) return;
+    
+        const options = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + process.env.CALENDLY_TOKEN,
+          },
+        };
+    
+        fetch(uri, options)
+          .then((response) => response.json())
+          .then((data) => {
+            if (!data.resource) throw new Error("Datos no encontrados");
+    
+            // Extraer start_time y user_id
+            const startTime = data.resource.start_time;
+            const calendlyUserUrl = data.resource.event_memberships?.[0]?.user || "";
+            const calendlyUserId = calendlyUserUrl.split("/").pop(); // Extraer el ID desde la URL
+    
+            const filteredData = {
+              start_time: startTime,
+              calendly_user_id: calendlyUserId,
+              user_id: userId, // ID del usuario logueado en tu página
+            };
+    
+            console.log("Datos filtrados:", filteredData);
+            setAppointmentData(filteredData);
+          })
+          .catch((err) => console.error("Error obteniendo datos:", err));
+      }, [uri]);
+    
+      useEffect(() => {
+        if (!appointmentData) return;
+    
+        fetch("https://tu-backend.com/api/citas", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(appointmentData),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log("Respuesta del backend:", data))
+          .catch((err) => console.error("Error enviando datos:", err));
+      }, [appointmentData]);
+    
+      // ✅ EL RETURN DEBE ESTAR AQUÍ SIN UNA COMA ANTES
+      return (
+        <>
+          <h1>Calendario y Citas</h1>
+          {InlineWidget Calendly }
+          <div>
+            <InlineWidget url="https://calendly.com/ivanperezgonzalez123/30min" />
+          </div>
+        </>
+      );
+    };
   }
-};
+  */
 
-    fetch(uri, options)
-      .then(response => response.json())
-      .then(response => console.log(response))
-      .catch(err => console.error(err));
-  },[uri])
+  export const Calendars = ({ userId }) => {
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedHour, setSelectedHour] = useState("09");
+    const [selectedMinute, setSelectedMinute] = useState("00");
+    const [events, setEvents] = useState([]);
+    const [appointmentConfirmed, setAppointmentConfirmed] = useState(false);
+    const [uri, setUri] = useState('');
+    
+    // Horarios disponibles
+    const availableHours = [
+      { start: 9, end: 13 },
+      { start: 16, end: 20 }
+    ];
+  
+    // Escuchar eventos de Calendly
+    useCalendlyEventListener({
+      onEventScheduled: (e) => setUri(e?.data?.payload?.event?.uri || ''),
+    });
+  
+    // Generar horarios disponibles
+    const generateAvailableTimes = () => {
+      const availableTimes = [];
+      availableHours.forEach((slot) => {
+        for (let hour = slot.start; hour < slot.end; hour++) {
+          availableTimes.push(`${hour < 10 ? `0${hour}` : hour}:00`);
+          availableTimes.push(`${hour < 10 ? `0${hour}` : hour}:30`);
+        }
+      });
+      return availableTimes;
+    };
+  
+    // Confirmar cita
+    const handleConfirmAppointment = () => {
+      if (selectedDate) {
+        const fullDate = `${selectedDate} ${selectedHour}:${selectedMinute}`;
+        setEvents([...events, { id: fullDate, title: "Cita con", date: fullDate }]);
+        setAppointmentConfirmed(true);
+        alert(`Cita confirmada para: ${fullDate}`);
+      } else {
+        alert("Por favor, selecciona una fecha.");
+      }
+    };
+  
+    return (
+      <>
+        <h1>Calendario y Citas</h1>
+  
+        {/* InlineWidget de Calendly */}
+        <div>
+          <InlineWidget url="https://calendly.com/ivanperezgonzalez123/30min" />
+        </div>
+  
+        {/* Componente para obtener datos del evento */}
+        {uri && <CalendlyFetch uri={uri} userId={userId} />}
+      </>
+    );
+  };
+  
+  const CalendlyFetch = ({ uri, userId }) => {
+    const [appointmentData, setAppointmentData] = useState(null);
+  
+    useEffect(() => {
+      if (!uri) return;
+  
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + process.env.CALENDLY_TOKEN,
+        },
+      };
+  
+      fetch(uri, options)
+        .then((response) => response.json())
+        .then((data) => {
+          if (!data.resource) throw new Error("Datos no encontrados");
+  
+          const startTime = data.resource.start_time;
 
-
-  return (
-    <>
-      <h1>Calendario y Citas</h1>
-      {/* InlineWidget Calendly */}
-      <div>
-        <InlineWidget url="https://calendly.com/ivanperezgonzalez123/30min" />
-      </div>
-
-     </>
-  );
-};
-
+          const filteredData = {
+            start_time: startTime,
+            user_id: userId,
+          };
+  
+          console.log("Datos filtrados:", filteredData);
+          setAppointmentData(filteredData);
+        })
+        .catch((err) => console.error("Error obteniendo datos:", err));
+    }, [uri]);
+  
+    useEffect(() => {
+      if (!appointmentData) return;
+  
+      fetch(process.env.BACKEND_URL + '/api/citas', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(appointmentData),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log("Respuesta del backend:", data))
+        .catch((err) => console.error("Error enviando datos:", err));
+    }, [appointmentData]);
+  
+    return null; // No es necesario renderizar nada
+  };
