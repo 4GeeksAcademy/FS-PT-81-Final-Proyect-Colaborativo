@@ -64,9 +64,9 @@ export const Formulario = () => {
       </button>
       <p className="footer-login">
         ¿No tienes cuenta?{" "}
-        <a href="/elegir" className="link">
+        <button onClick={() => navigate("/elegir")} className="link">
           Regístrate aquí
-        </a>
+        </button>
       </p>
     </form>
   );

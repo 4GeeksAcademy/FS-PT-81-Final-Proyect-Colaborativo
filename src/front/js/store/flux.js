@@ -366,11 +366,45 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ auth: true, token: data.token });
 
 					return true; // Indica que el login fue exitoso
-				} catch (error) {
+				} 
+				catch (error) {
 					console.error("Error durante el login:", error);
 					return false; // Indica que el login falló
 				}
 			},
+
+
+			verify: async (token) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/api/verify" + token, {
+						method: "POST",
+						headers: {"Content-Type": "application/json"},
+						body: JSON.stringify(formData),
+					});
+
+					if(!response.ok) {
+						const errorData = await response.json();
+						throw new Error(errorData.message || "Token incorrecto");
+					}
+
+					const data = await response.json();
+
+					localStorage.setItem("token", data.token);
+					getStore({auth: true, token: data.token});
+
+
+
+					return true;
+				}
+				catch(error) {
+					console.error("Error durante el verify", error);
+					return false;
+				}
+			},
+			logout: () => {
+				localStorage.removeItem("token"); // Elimina el token del localStorage
+				setStore({ auth: false, token: null }); // Actualiza el estado global
+			  },
 		},
 	}
 };

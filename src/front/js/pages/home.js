@@ -7,20 +7,38 @@ import "../../styles/home.css";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate();
-	const handleAgendarCita = () => navigate("/doctors");
+	
+	  const handleAgendarCita = () => {
+		if(!store.auth){
+		  navigate("/login", {state: {from:"/doctors"}})
+		}else {
+		  navigate("/doctors")
+		}
+	  }
 
 	return (
 		<>
 			<div className="jumbotron jumbotron_div">
 				<h1 className="jumbotron_h1">AGENPRO</h1>
 				<h3 className="jumbotron_h3">La agenda rápida, simple y segura.</h3>
+				
 			</div>
 
+			<section className="services-description fade-in">
+				<h2>¿Qué hacemos por ti?</h2>
+				<p>
+					En AGENPRO, te ayudamos a gestionar tus citas de una manera rápida, simple y segura. 
+					Ya no tendrás que preocuparte por perder tiempo en agendar tus compromisos. Con nuestra 
+					agenda digital podrás organizar todas tus citas con facilidad, sin estrés, y de manera eficiente.
+				</p>
+			</section>
 			
 
 			<div className="container-fluid">
 				<div className="row">
 					<div className="col-sm-12 col-md-12 col-lg-6 col-xl-3 col-xxl-3 d-flex justify-content-center card_container">
+
+						
 						<div className="card">
 							<img
 								src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=3431&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -82,14 +100,7 @@ export const Home = () => {
 					</div>
 				</div>
 
-				<section className="services-description fade-in">
-				<h2>¿Qué hacemos por ti?</h2>
-				<p>
-					En AGENPRO, te ayudamos a gestionar tus citas de una manera rápida, simple y segura. 
-					Ya no tendrás que preocuparte por perder tiempo en agendar tus compromisos. Con nuestra 
-					agenda digital podrás organizar todas tus citas con facilidad, sin estrés, y de manera eficiente.
-				</p>
-			</section>
+				
 
 				<div>
 					<div className="d-flex flex-column justify-content-center align-items-center my-4 divdelfondo">
