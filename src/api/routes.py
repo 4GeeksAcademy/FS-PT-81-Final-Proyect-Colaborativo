@@ -12,7 +12,7 @@ api = Blueprint('api', __name__)
 
 
 # Allow CORS requests to this API
-CORS(api, origins="https://fluffy-telegram-rqjxg4x66p72555r-3001.app.github.dev", methods=["GET", "POST", "PUT", "DELETE"], allow_headers=["Content-Type"])
+CORS(api)
 
 
 @api.route('/users', methods=['GET'])

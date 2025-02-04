@@ -277,26 +277,44 @@ respuesta cuando pides info del https://api.calendly.com/scheduled_events/uri
   const CalendlyFetch = ({ uri, userId }) => {
     const [appointmentData, setAppointmentData] = useState(null);
   
+    console.log("Valor de uri recibido:", uri);
+  
+    // Función para validar datos
+    const validateData = (uri, userId) => {
+      if (!uri) {
+        console.error("La URI no está definida. Verifica que se está pasando correctamente.");
+        return false;
+      }
+      if (!userId) {
+        console.error("El userId no está definido. Verifica que el usuario está autenticado.");
+        return false;
+      }
+      return true;
+    };
+  
     useEffect(() => {
-      if (!uri) return;
+      if (!validateData(uri, userId)) return;
   
       const options = {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + process.env.CALENDLY_TOKEN,
+          Authorization: `Bearer ${process.env.CALENDLY_TOKEN}`,
         },
       };
   
       fetch(uri, options)
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) throw new Error("Error al obtener datos de Calendly");
+          return response.json();
+        })
         .then((data) => {
-          if (!data.resource) throw new Error("Datos no encontrados");
+          if (!data.resource || !data.resource.start_time) {
+            throw new Error("Datos no encontrados en la respuesta de Calendly");
+          }
   
-          const startTime = data.resource.start_time;
-
           const filteredData = {
-            start_time: startTime,
+            start_time: data.resource.start_time,
             user_id: userId,
           };
   
@@ -304,22 +322,35 @@ respuesta cuando pides info del https://api.calendly.com/scheduled_events/uri
           setAppointmentData(filteredData);
         })
         .catch((err) => console.error("Error obteniendo datos:", err));
-    }, [uri]);
+    }, [uri, userId]);
   
     useEffect(() => {
-      if (!appointmentData) return;
+      if (!appointmentData || !appointmentData.start_time || !appointmentData.user_id) {
+        console.error("Los datos de la cita no están completos:", appointmentData);
+        return;
+      }
   
-      fetch(process.env.BACKEND_URL + '/api/citas', {
+      const formattedData = {
+        fecha: appointmentData.start_time,
+        users: appointmentData.user_id,
+      };
+  
+      console.log("Enviando datos al backend:", formattedData);
+  
+      fetch(`${process.env.BACKEND_URL}/api/citas`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(appointmentData),
+        body: JSON.stringify(formattedData),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) throw new Error("Error en la respuesta del backend");
+          return res.json();
+        })
         .then((data) => console.log("Respuesta del backend:", data))
         .catch((err) => console.error("Error enviando datos:", err));
     }, [appointmentData]);
   
-    return null; // No es necesario renderizar nada
+    return null;
   };
