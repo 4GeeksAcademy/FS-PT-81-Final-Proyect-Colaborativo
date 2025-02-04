@@ -17,7 +17,7 @@ export const Footer = () => {
         <div className="footer-section">
           <h4>Enlaces</h4>
           <ul>
-            <li><a className="enlacefooter" href="#">Inicio</a></li>
+            <li><a className="enlacefooter" href="#">Ir arriba</a></li>
             <li><a className="enlacefooter" href="https://4geeks.com/es/terminos-y-condiciones" target="_blank">Terminos y condiciones</a></li>
             <li><a className="enlacefooter" href="https://4geeks.com/es/politicas-de-privacidad" target="_blank">Politicas de privacidad</a></li>
             <li><a className="enlacefooter" href="https://4geeksacademy.com/es/inicio" target="_blank">Visita 4Geeks Academy</a></li>
