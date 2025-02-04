@@ -1,256 +1,188 @@
 /*REGISTER*/
 .custom-register-form {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 3px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  font-family: Arial, sans-serif;
-}
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 3px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+  }
+  
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  
+  
+  .required {
+    color: red;
+    font-weight: bold;
+  }
+  
+  
+  .custom-register-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #000; 
+    color: #fff; 
+    border: none;
+    border-radius: 25px; 
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .custom-register-button:hover {
+    background-color: #333; 
+  }
+  
+ 
+  .form-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .form-footer a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .form-footer a:hover {
+    text-decoration: underline;
+  }
+  
+  /*LOGIN*/ 
+ 
+  body {
+    background-color: #f4f7fa;
+    font-family: Arial, sans-serif;
+  }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  font-size: 16px;
-  color: #000;
-  margin-bottom: 5px;
-}
-
-.form-group input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  font-family: inherit;
-}
-
-.required {
-  color: red;
-  font-weight: bold;
-}
-
-.custom-register-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  text-align: center;
-}
-
-.custom-register-button:hover {
-  background-color: #333;
-}
-
-.form-footer {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
-  color: #555;
-}
-
-.form-footer a {
-  color: #000;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.form-footer a:hover {
-  text-decoration: underline;
-}
-
-
-body {
-  background-color: #f4f7fa;
-  font-family: Arial, sans-serif;
-  position: relative;
-  padding-bottom: 3em;
-  min-height: 100vh;
-}
-
-/*LOGIN*/
-.form {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 2px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  font-family: Arial, sans-serif;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-.label {
-  font-size: 16px;
-  color: #000;
-  margin-bottom: 5px;
-}
-
-.input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  font-family: inherit;
-}
-
-.required {
-  color: red;
-  font-weight: bold;
-}
-
-.button {
-  width: 100%;
-  padding: 12px;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  text-align: center;
-  transition: background-color 0.3s;
-}
-
-.button:hover {
-  background-color: #333;
-}
-
-.footer-login {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
-  color: #555;
-}
-
-.link {
-  color: #000;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.link:hover {
-  text-decoration: underline;
-}
-
+  .form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .label {
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 5px;
+  }
+  
+  .input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  
+  .required {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 12px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #333;
+  }
+  
+  .footer-login {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .link {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
 /* NAVBAR */
-.logonavbar {
-  height: 6rem;
-}
 
-.navbar {
-  background-color: #2C5364;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: white;
-}
-
-.btn-green {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.btn-green:hover {
-  background-color: #218838;
-  transform: scale(1.05);
-}
-
+  .navbar {
+    background-color: #2C5364;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+  }
+  
+ 
+  .btn-green {
+    background-color: #28a745; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .btn-green:hover {
+    background-color: #218838; 
+    transform: scale(1.05);
+  }
 .nav-link {
   color: white;
   display: flex;
 }
 
-/* Footer 2*/
-.footer {
-  background: #2d2d2d;
-  color: white;
-  padding: 2rem 1rem;
-}
+/*FOOTER*/
 
-.footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.footer-section {
-  margin-bottom: 1.5rem;
-}
-
-.footer-section h4 {
-  margin-bottom: 1rem;
-  color: #fff;
-}
-
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-section ul li {
-  margin-bottom: 0.5rem;
-}
-
-.social-icons {
-  display: flex;
-  gap: 1rem;
-}
-
-.social-icons a {
-  font-size: 1.5rem;
-  color: white;
-  transition: color 0.3s;
-}
-
-.social-icons a:hover {
-  color: #007bff;
-}
-
-.footer-copyright {
-  text-align: center;
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #444;
-}
-
-@media (max-width: 768px) {
-  .footer-container {
-    grid-template-columns: 1fr;
-  }
-}
-
-.enlacefooter {
-  text-decoration: none;
-}
-
-
-/*FOOTER
 .footer {
   background-color: #2C5364;
   padding: 10px 20px;
@@ -264,257 +196,76 @@ body {
   display: flex;
   justify-content: space-between; 
   align-items: center; 
-  gap: 20px; 
+  gap:20px; 
 }
 
 .nav-link {
   text-decoration: none; 
   font-size: 16px; 
 }
-
 .nav-link:hover {
   color: white; 
 }
-  */
-
-/*BOTONES DEL Navbar*/
-.boton-login {}
 
 /* Estilos de Home.js */
-.jumbotron_div {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
+.jumbotron_div{
+  margin:0;
   padding: 0;
+  /*font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;*/
+  /*background-image: url("https://clinicalarriba.es/wp-content/uploads/2018/04/Slider1.jpg");*/
   background-color: #2C5364;
-  height: 20vh;
+  height: 30vh;
   background-size: cover;
   background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #4286F4;
-  border-radius: 0px !important;
-}
 
-.jumbotron_h1 {
-  margin: 0;
-  padding: 0 1rem 0 1rem;
-  font-size: 4rem;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 700;
-  color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  text-align: center;
+  color:#4286F4;
+  border-radius: 0px!important;
 }
-
-.jumbotron_h3 {
+.jumbotron_h1{
   margin: 0;
-  padding: 0 1rem 0 1rem;
-  font-size: 2rem;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-weight: 400;
-  color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  text-align: center;
-}
-
-.divdelfondopadre {
-  background-color: #2C5364;
-  margin: 0;
-  
+  /*padding: 0;*/
   font-size: 4rem;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   line-height: 1.5;
   font-weight: bolder;
+  /*background-color: rgba(255, 255, 255, 0.8);*/
   color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-  align-items: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+  text-align: center; 
 }
 
-.divformularioconsulta {
-  font-family: Arial, sans-serif;
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
-  background-color: #ffffff;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.error {
-  color: red;
-  font-size: 0.9em;
-  margin-top: 5px;
-}
-
-
-.card_container {
+.card_container{
   display: flex;
   justify-content: space-around;
 }
-
-.card {
-  border-radius: 10px;
-  overflow: hidden;
-  width: 100%;
-  height: 400px;
-  min-height: 400px;
-}
-
-.card-img-top {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.card-body .card-text {
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: #333;
-  margin-bottom: 0.5rem;
-}
-
-.card-body p:nth-child(2) {
-  font-size: 0.9rem;
-  font-family: 'Georgia', serif;
-  color: #666;
-  line-height: 1.5;
-  margin-bottom: 1rem;
-}
-
 /*BOTON AGENDAR CITA*/
 .btn-custom {
   background-color: #0056b3;
   color: white;
   padding: 0.75rem 5rem;
-  border: none;
-  border-radius: 5px;
+  border: none; 
+  border-radius: 5px; 
   font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
+  font-weight: bold; 
+  cursor: pointer; 
   transition: background-color 0.3s ease;
 }
 
 .btn-custom:hover {
-  background-color: #004494;
+  background-color: #004494; 
 }
-
 /*Titulo de especialidades*/
 .title {
   display: flex;
   justify-content: center;
 }
-
 /*Lineas divisorias*/
-.lineas {
-  border: 0;
-  border-top: 4px solid #003366;
-  width: 80%;
+.lineas{
+  border: 0; 
+  border-top: 4px solid #003366; 
+  width: 80%; 
   margin: 20px auto;
-}
-
-.btn-especial {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 14px 36px;
-  border-radius: 8px;
-  font-size: 1.4rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  outline: none;
-  will-change: transform, background-color, box-shadow;
-}
-
-.btn-especial:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.btn-especial:focus {
-  outline: 3px solid #99c2ff;
-  outline-offset: 2px;
-}
-
-.btn-especial:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.services-description {
-  text-align: center;
-  padding: 40px 20px;
-  background-color: #f9f9f9;
-  margin-bottom: 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 1s forwards;
-}
-
-.services-description h2 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #2C5364;
-  margin-bottom: 20px;
-}
-
-.services-description p {
-  font-size: 1.2rem;
-  color: #555;
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.card-body p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
-}
-
-.card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }

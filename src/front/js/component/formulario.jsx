@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext.js"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-// import "../../styles/formulario.css";
 
 export const Formulario = () => {
   const { actions } = useContext(Context)
@@ -65,7 +64,7 @@ export const Formulario = () => {
       </button>
       <p className="footer-login">
         ¿No tienes cuenta?{" "}
-        <a onClick={() => navigate("/elige")} className="link">
+        <a href="/registro" className="link">
           Regístrate aquí
         </a>
       </p>
