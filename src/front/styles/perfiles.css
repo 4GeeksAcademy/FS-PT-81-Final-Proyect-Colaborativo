@@ -1,0 +1,111 @@
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.mis-citas-title-empresa {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+    font-size: 20px;
+}
+
+.mis-citas-title-empresa li {
+    font-weight: bold;
+    color: #333;
+}
+
+.groupon-item {
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.detalles-cita {
+    flex: 1;
+}
+
+.detalles-cita h3 {
+    margin: 0;
+    color: #333;
+}
+
+.detalles-cita p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.buttons button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.comprar-denuevo {
+    background: #4caf50;
+    color: white;
+}
+
+.gift {
+    background: #ff9800;
+    color: white;
+}
+/*BOTONES ELEGIR MENU*/
+body {
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.containe-botones {
+    width: 60%;
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+hr {
+    border: 1px solid white;
+    margin-bottom: 20px;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.cliente, .empresa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid white;
+    width: 150px;
+}
+

@@ -4,26 +4,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 
 export const Formulary = () => {
-  const {store,actions} = useContext(Context)
+  const { store, actions } = useContext(Context)
   const navigate = useNavigate()
-    const [formData, setFormData] = useState({
-      name: "",
-      lastname: "",
-      email: "",
-      password: "",
-    });
-  
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-    };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if (actions.register(formData)) navigate("/doctors")
-      console.log("User registered:", formData);
-    };
-  
+  const [formData, setFormData] = useState({
+    name: "",
+    lastname: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (actions.register(formData)) navigate("/doctors")
+    console.log("User registered:", formData);
+  };
+
+    
     return (
       <form className="custom-register-form" onSubmit={handleSubmit}>
         <h1 className="justify-content-center">Registro</h1>
@@ -75,7 +76,7 @@ export const Formulary = () => {
             required
           />
         </div>
-        <button type="submit" className="custom-register-button">
+        <button type="submit" className="custom-register-button" onClick={() => handleSubmit()}>
           Registrarme
         </button>
         <p className="form-footer">
