@@ -111,7 +111,7 @@ export const Home = () => {
 					<div className="divderecha p-2">
 						<h1>Contacto</h1>
 						<div className="divformularioconsulta">
-							{/* <form id="contactForm">
+							 <form id="contactForm">
 								<div className="form-group">
 									<label for="nombre">Nombre:</label>
 									<input type="text" id="nombre" name="nombre" required/>
