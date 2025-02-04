@@ -355,7 +355,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					// Guarda el token en localStorage y actualiza el estado global
 					localStorage.setItem("token", data.token);
-					localStorage.setItem( "id", data.user.id);
 					setStore({ auth: true, token: data.token, user: data.user , id: data.user.id});
 
 					return true; // Indica que el login fue exitoso
