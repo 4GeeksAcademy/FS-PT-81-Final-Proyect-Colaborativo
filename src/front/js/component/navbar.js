@@ -26,7 +26,6 @@ export const Navbar = () => {
   };
 
   const handleCuenta = () => {
-
     navigate("/cuenta")
   }
 

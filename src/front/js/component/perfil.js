@@ -1,32 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
+ const navigate = useNavigate()
   const [userData, setUserData] = useState({
-    email: "",
-    password: "",
-    name: "",
+    name: ""
   });
 
-  const [loading, setLoading] = useState(true);
+  // useEffect(() => {
+  //   const loadData = async () => {
+  //     if (!store.user) {
+  //       try {
+  //         await actions.getUserData();  // Aseguramos que los datos se carguen si no están en el store
+  //       } catch (error) {
+  //         console.error("Error cargando datos:", error);
+  //       } finally {
+  //         setLoading(false);
+  //       }
+  //     } else {
+  //       setUserData({
+  //         name: store.user.name,
+  //       });
+  //     }
+  //   };
+  
+  //   loadData();
+  // }, [store.user, actions]);
+  useEffect(() =>{
+    actions.getUserData();
+  },[]);
 
-  useEffect(() => {
-    const loadData = async () => {
-      if (!store.user) {  // Cambiar a store.user (singular)
-        await actions.getUserData();
-      }
-      // Actualizar estado con datos del store
-      setUserData({
-        email: store.user?.email || "",
-        password: "",  // Dejar vacío por seguridad
-        name: store.user?.name || "",
-      });
-      setLoading(false);
-    };
-    loadData();
-  }, [store.user]);  // Dependencia de store.user
+  console.log(store.user)
+  console.log(store.id)
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,73 +44,29 @@ export const Perfil = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    actions.editarPerfil(store.id, userData);
+    navigate("/cuenta")
     
-    if (!store.user?.id) {  // Verificar ID del usuario
-      alert("Usuario no identificado");
-      return;
-    }
-
-    // Enviar solo campos modificables (no enviar password vacío)
-    const dataToSend = {
-      name: userData.name,
-      email: userData.email,
-      ...(userData.password && { password: userData.password }) // Enviar password solo si se modifica
-    };
-
-    const success = await actions.editarPerfil(store.user.id, dataToSend);
-    
-    if (success) {
-      alert("Perfil actualizado");
-      // Limpiar password después de éxito
-      setUserData(prev => ({ ...prev, password: "" }));
-    } else {
-      alert("Error al actualizar");
-    }
   };
-
-  if (loading) return <div>Cargando...</div>;
 
   return (
     <div className="container mt-5">
       <h2>Editar Perfil</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label>Email</label>
-          <input
-            type="email"
-            className="form-control"
-            name="email"
-            value={userData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
           <label>Nombre</label>
           <input
             type="text"
             className="form-control"
             name="name"
-            value={userData.name}
+            value={store.user?.name}
             onChange={handleChange}
             required
           />
         </div>
 
-        <div className="mb-3">
-          <label>Nueva Contraseña (dejar vacío para no cambiar)</label>
-          <input
-            type="password"
-            className="form-control"
-            name="password"
-            value={userData.password}
-            onChange={handleChange}
-            placeholder="••••••••"
-          />
-        </div>
 
-        <button type="submit" className="btn btn-primary">
+        <button className="btn btn-primary" type="submit">
           Actualizar
         </button>
       </form>
