@@ -68,12 +68,16 @@
   text-decoration: underline;
 }
 
-/*LOGIN*/ 
+
 body {
   background-color: #f4f7fa;
   font-family: Arial, sans-serif;
+  position:relative;
+  padding-bottom: 3em;
+  min-height: 100vh;
 }
 
+/*LOGIN*/ 
 .form {
   max-width: 400px;
   margin: 50px auto;
@@ -180,7 +184,73 @@ body {
   display: flex;
 }
 
-/*FOOTER*/
+/* Footer 2*/
+.footer {
+  background: #2d2d2d;
+  color: white;
+  padding: 2rem 1rem;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.footer-section {
+  margin-bottom: 1.5rem;
+}
+
+.footer-section h4 {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icons a {
+  font-size: 1.5rem;
+  color: white;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #007bff;
+}
+
+.footer-copyright {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #444;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.enlacefooter{
+  text-decoration: none;
+}
+
+
+/*FOOTER
 .footer {
   background-color: #2C5364;
   padding: 10px 20px;
@@ -205,6 +275,7 @@ body {
 .nav-link:hover {
   color: white; 
 }
+  */
 
 /*BOTONES DEL Navbar*/
 .boton-login {}
@@ -252,7 +323,7 @@ body {
 .divdelfondo {
   background-color: #2C5364;
   margin: 0;
-  padding: 0 0 2rem 0;
+  padding: 0;
   font-size: 4rem;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   line-height: 1.5;

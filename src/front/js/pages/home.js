@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { FaUser, FaEnvelope, FaEdit } from 'react-icons/fa';
+
 
 import "../../styles/home.css";
 
@@ -21,19 +24,17 @@ export const Home = () => {
 			<div className="jumbotron jumbotron_div">
 				<h1 className="jumbotron_h1">AGENPRO</h1>
 				<h3 className="jumbotron_h3">La agenda rápida, simple y segura.</h3>
-				
 			</div>
 
-			<section className="services-description fade-in">
+			<section className="services-description fade-in-down">
 				<h2>¿Qué hacemos por ti?</h2>
-				<p>
+				<h3>
 					En AGENPRO, te ayudamos a gestionar tus citas de una manera rápida, simple y segura. 
 					Ya no tendrás que preocuparte por perder tiempo en agendar tus compromisos. Con nuestra 
 					agenda digital podrás organizar todas tus citas con facilidad, sin estrés, y de manera eficiente.
-				</p>
+				</h3>
 			</section>
 			
-
 			<div className="container-fluid">
 				<div className="row">
 					<div className="col-sm-12 col-md-12 col-lg-6 col-xl-3 col-xxl-3 d-flex justify-content-center card_container">
@@ -103,11 +104,9 @@ export const Home = () => {
 				
 
 				<div>
-					<div className="d-flex flex-column justify-content-center align-items-center my-4 divdelfondo">
+					<div id="consultasnavbar" className="d-flex flex-column justify-content-center align-items-center my-4 divdelfondo">
 						<h1>AGENPRO es tu agenda digital sin estrés. ¿Listo para evolucionar?</h1>
-						<div className="d-grid gap-2 col-4 mx-auto">
-							<button className="btn-especial">CONTACTANOS</button>
-						</div>
+						<h1>%$%$%$ TOCANDO LA OPCION DE CONTACTO DEL NAVBAR TE TRAE A ESTA SECCION, ACA VA UN FORMULARIO PARA QUE RELLENEN LOS CLIENTES CON CONSULTAS, PARA HACER MAS BULTO EN LA PAGINA Y DEJARLA MAS LARGA Y TAMBIEN PODRIA IR UNA IMAGEN PARA DARLE MEJOR VISTA, EL COLOR DEL FOOTER ES MOMENTANEO ESCRIBO COSAS PARA DARLE ESPACIO, NO SE QUE HACES LEYENDO ESTO %$%$%$</h1>
 					</div>
 				</div>
 			</div>
