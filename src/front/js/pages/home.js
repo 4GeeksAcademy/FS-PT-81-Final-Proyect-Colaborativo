@@ -113,31 +113,31 @@ export const Home = () => {
 						<div className="divformularioconsulta">
 							{/* <form id="contactForm">
 								<div className="form-group">
-									<label htmlFor="nombre">Nombre:</label>
+									<label for="nombre">Nombre:</label>
 									<input type="text" id="nombre" name="nombre" required/>
 										<div className="error" id="nombreError"></div>
 								</div>
 
 								<div className="form-group">
-									<label htmlFor="telefono">Teléfono:</label>
+									<label for="telefono">Teléfono:</label>
 									<input type="tel" id="telefono" name="telefono" required />
 									<div className="error" id="telefonoError"></div>
 								</div>
 
 								<div className="form-group">
-									<label htmlFor="email">Email:</label>
+									<label for="email">Email:</label>
 									<input type="email" id="email" name="email" required />
 									<div className="error" id="emailError"></div>
 								</div>
 
 								<div className="form-group">
-									<label htmlFor="consulta">Consulta:</label>
+									<label for="consulta">Consulta:</label>
 									<textarea id="consulta" name="consulta" rows="1" required></textarea>
 									<div className="error" id="consultaError"></div>
 								</div>
 
 								<button className="btn btn-outline-primary">Enviar</button>
-							</form> */}
+							</form>
 						</div>
 					</div>
 				</div>
