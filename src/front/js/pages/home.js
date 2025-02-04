@@ -114,29 +114,27 @@ export const Home = () => {
 							<form id="contactForm" novalidate>
 								<div className="form-group">
 									<label for="nombre">Nombre:</label>
-									<input type="text" id="nombre" name="nombre" required/>
+									<input type="text" id="nombre" name="nombre" placeholder="EJ: Juan Perez" required/>
 										<div className="error" id="nombreError"></div>
 								</div>
 
 								<div className="form-group">
 									<label for="telefono">Teléfono:</label>
-									<input type="tel" id="telefono" name="telefono" required />
+									<input type="tel" id="telefono" name="telefono" placeholder="EJ: 626010815" required />
 									<div className="error" id="telefonoError"></div>
 								</div>
 
 								<div className="form-group">
 									<label for="email">Email:</label>
-									<input type="email" id="email" name="email" required />
+									<input type="email" id="email" name="email" placeholder="EJ: juanperez@agenpro.es" required />
 									<div className="error" id="emailError"></div>
 								</div>
 
 								<div className="form-group">
-									<label for="consulta">Consulta:</label>
-									<textarea id="consulta" name="consulta" rows="1" required></textarea>
-									<div className="error" id="consultaError"></div>
+									<label for="consulta">Un asesor se comunicara con usted a la brevedad.</label>
+									<button className="btn btn-outline-primary">Enviar</button>
 								</div>
-
-								<button className="btn btn-outline-primary">Enviar</button>
+								
 							</form>
 						</div>
 					</div>
