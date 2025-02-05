@@ -37,10 +37,10 @@
 .custom-register-button {
   width: 100%;
   padding: 12px;
-  background-color: #000; 
-  color: #fff; 
+  background-color: #000;
+  color: #fff;
   border: none;
-  border-radius: 25px; 
+  border-radius: 25px;
   font-size: 16px;
   cursor: pointer;
   font-weight: bold;
@@ -48,7 +48,7 @@
 }
 
 .custom-register-button:hover {
-  background-color: #333; 
+  background-color: #333;
 }
 
 .form-footer {
@@ -72,12 +72,12 @@
 body {
   background-color: #f4f7fa;
   font-family: Arial, sans-serif;
-  position:relative;
+  position: relative;
   padding-bottom: 3em;
   min-height: 100vh;
 }
 
-/*LOGIN*/ 
+/*LOGIN*/
 .form {
   max-width: 400px;
   margin: 50px auto;
@@ -163,7 +163,7 @@ body {
 }
 
 .btn-green {
-  background-color: #28a745; 
+  background-color: #28a745;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -175,7 +175,7 @@ body {
 }
 
 .btn-green:hover {
-  background-color: #218838; 
+  background-color: #218838;
   transform: scale(1.05);
 }
 
@@ -245,7 +245,7 @@ body {
   }
 }
 
-.enlacefooter{
+.enlacefooter {
   text-decoration: none;
 }
 
@@ -305,8 +305,8 @@ body {
   line-height: 1.5;
   font-weight: 700;
   color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
-  text-align: center; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-align: center;
 }
 
 .jumbotron_h3 {
@@ -316,22 +316,56 @@ body {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-weight: 400;
   color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
-  text-align: center; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-align: center;
 }
 
-.divdelfondo {
+.divdelfondopadre {
   background-color: #2C5364;
   margin: 0;
-  padding: 0;
+  
   font-size: 4rem;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   line-height: 1.5;
   font-weight: bolder;
   color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
-  text-align: center; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
 }
+
+.divformularioconsulta {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
 
 .card_container {
   display: flex;
@@ -339,17 +373,17 @@ body {
 }
 
 .card {
-  border-radius: 10px; 
-  overflow: hidden;   
+  border-radius: 10px;
+  overflow: hidden;
   width: 100%;
   height: 400px;
   min-height: 400px;
 }
 
 .card-img-top {
-  width: 100%;        
-  height: 200px;       
-  object-fit: cover;  
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
 .card-body .card-text {
@@ -372,16 +406,16 @@ body {
   background-color: #0056b3;
   color: white;
   padding: 0.75rem 5rem;
-  border: none; 
-  border-radius: 5px; 
+  border: none;
+  border-radius: 5px;
   font-size: 1.2rem;
-  font-weight: bold; 
-  cursor: pointer; 
+  font-weight: bold;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .btn-custom:hover {
-  background-color: #004494; 
+  background-color: #004494;
 }
 
 /*Titulo de especialidades*/
@@ -392,9 +426,9 @@ body {
 
 /*Lineas divisorias*/
 .lineas {
-  border: 0; 
-  border-top: 4px solid #003366; 
-  width: 80%; 
+  border: 0;
+  border-top: 4px solid #003366;
+  width: 80%;
   margin: 20px auto;
 }
 
@@ -460,12 +494,13 @@ body {
 
 @keyframes fadeIn {
   0% {
-      opacity: 0;
-      transform: translateY(20px);
+    opacity: 0;
+    transform: translateY(20px);
   }
+
   100% {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

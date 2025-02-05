@@ -9,30 +9,57 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			auth: localStorage.getItem('token') || false,
 			token: null,
+			id: null,
+			name: null,
 		},
 		actions: {
 			getUserData: async () => {
 				try {
-					const resp = await fetch(process.env.BACKEND_URL + '/api/protected', {
+					console.log("Ejecutando getUserData")
+
+					const token = localStorage.getItem("token")
+					console.log("Token",token)
+
+					const id = localStorage.getItem("id")
+					if (!id) {
+						throw new Error("ID del usuario no encontrado en localStorage.");
+					}
+					const token = localStorage.getItem("token")
+
+					
+					const resp = await fetch(`${process.env.BACKEND_URL}api/user`, {
 						method: 'GET',
 						headers: {
+							'Authorization': `Bearer ${token}`,
 							'Content-Type': 'application/json',
-							'Authorization': `Bearer ${localStorage.getItem('token')}`
-						},
-					})
-					if (!resp.ok) throw new Error('Error registering')
-					const data = await resp.json()
-					console.log(data)
-					localStorage.setItem('token', data.token)
-					setStore({ user: data.user })
-				}
-				catch (error) {
-					console.error(error)
+
+						}
+					});
+			
+					if (!resp.ok) {
+						if (resp.status === 404) {
+							throw new Error("No hay usuario registrados.");
+						}
+						throw new Error("Error al obtener los usuarios.");
+					}
+			
+					const data = await resp.json();
+					
+					localStorage.setItem('token', data.token); 
+					localStorage.setItem('id', data.user.id);
+
+					
+					setStore({ user: data.user });
+					console.log("Informacion de usuario", data);
+
+					return data.user;
+				} catch (error) {
+					console.error(error);
 				}
 			},
 			register: async formData => {				
 				try {
-					const resp = await fetch(process.env.BACKEND_URL + '/api/register', {
+					const resp = await fetch(process.env.BACKEND_URL + 'api/register', {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'
@@ -43,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await resp.json()
 					console.log(data)
 					localStorage.setItem('token', data.token)
-					setStore({ auth: true, token: data.token })
+					setStore({ auth: true, token: data.token, id: data.user.id })
 					return true
 				}
 				catch (error) {
@@ -51,6 +78,51 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false
 				}
 			},
+
+
+			loginUser: async (formData) => {
+				try {
+					const response = await fetch(process.env.BACKEND_URL + "/api/login", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(formData),
+					});
+
+					if (!response.ok) {
+						const errorData = await response.json();
+						throw new Error(errorData.message || "Credenciales incorrectas");
+					}
+
+					const data = await response.json();
+
+					// Guarda el token en localStorage y actualiza el estado global
+					localStorage.setItem("token", data.token);
+					localStorage.setItem("id", data.user.id)
+					setStore({ auth: true, token: data.token , id: data.user.id});
+
+					return true; // Indica que el login fue exitoso
+				} 
+				catch (error) {
+					console.error("Error durante el login:", error);
+					return false; // Indica que el login falló
+				}
+			},
+							
+						}
+					});
+			
+					const data = await resp.json();
+					
+					localStorage.setItem('token', data.token,); 
+					console.log("Informacion de usuario", data);
+					setStore({ user: data.user });
+					return data.user;
+				} catch (error) {
+					console.error(error);
+				}
+			},
+			
+
 			getUsers: async () => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + '/api/users')
@@ -64,10 +136,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getUserId: async (id) => {
 				try {
-					const response = await fetch(process.env.BACKEND_URL + '/api/users/' + id)
+					const response = await fetch(process.env.BACKEND_URL + '/api/user/' + id)
 					if (!response.ok) throw new Error("Error obteniendo el id del Usuario");
 					const data = await response.json();
-					return data.user;
+					
+					setStore({user: data.user});
 				} catch (error) {
 					console.error("Error obteniendo el ID del usuario:", error);
 				}
@@ -99,7 +172,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			deleteUser: async (id) => {
 				try {
-					const response = await fetch(process.env.BACKEND_URL + '/api/users/' + id, {
+					const response = await fetch(process.env.BACKEND_URL + '/api/user/' + id, {
 						method: "DELETE"
 					});
 					if (!response.ok) throw new Error("Error borrando al usuario");
@@ -112,16 +185,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			updateUser: async (id, email, password) => {
 				try {
-					const response = await fetch(process.env.BACKEND_URL + '/api/users/' + id, {
+					const response = await fetch(process.env.BACKEND_URL + '/api/user/' + id, {
 						method: "PUT",
-						headers: { "Content-Type": "application/json" },
+						headers: { "Content-Type": "application/json",
+							'Authorization': `Bearer ${localStorage.getItem('token')}`
+						 },
 						body: JSON.stringify({ email, password }),
 					});
 					if (!response.ok) throw new Error("Error actualizando al usuario");
 					const data = await response.json();
 					const store = getStore();
 					setStore({
-						users: store.user.map((user) => user.id === id ? { ...user, ...data.user } : user),
+						user: store.user.map((user) => user.id === id ? { ...user, ...data.user } : user),
 					});
 				} catch (error) {
 					console.error("error actualizando al usuario");
@@ -140,7 +215,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getCompanyId: async (id) => {
 				try {
-					const response = await fetch(process.env.BACKEND_URL + '/api/comany/' + id)
+					const response = await fetch(process.env.BACKEND_URL + '/api/company/' + id)
 					if (!response.ok) throw new Error("Error obteniendo el id de la compañia");
 					const data = await response.json();
 					return data.user;
@@ -344,37 +419,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			loginUser: async (formData) => {
-				try {
-					const response = await fetch(process.env.BACKEND_URL + "/api/login", {
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify(formData),
-					});
-
-					if (!response.ok) {
-						const errorData = await response.json();
-						throw new Error(errorData.message || "Credenciales incorrectas");
-					}
-
-					const data = await response.json();
-
-					// Guarda el token en localStorage y actualiza el estado global
-					localStorage.setItem("token", data.token);
-					setStore({ auth: true, token: data.token });
-
-					return true; // Indica que el login fue exitoso
-				} 
-				catch (error) {
-					console.error("Error durante el login:", error);
-					return false; // Indica que el login falló
-				}
-			},
-
 
 			verify: async (token) => {
 				try {
-					const response = await fetch(process.env.BACKEND_URL + "/api/verify" + token, {
+					const response = await fetch(process.env.BACKEND_URL + "/api/user" + token, {
 						method: "POST",
 						headers: {"Content-Type": "application/json"},
 						body: JSON.stringify(formData),
@@ -390,8 +438,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					localStorage.setItem("token", data.token);
 					getStore({auth: true, token: data.token});
 
-
-
 					return true;
 				}
 				catch(error) {
@@ -399,42 +445,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false;
 				}
 			},
+
 			logout: () => {
 				localStorage.removeItem("token"); // Elimina el token del localStorage
-				setStore({ auth: false, token: null }); // Actualiza el estado global
+				localStorage.removeItem("id"); 
+				setStore({ auth: false, token: null , id: null}); // Actualiza el estado global
 			},
 
-			editarPerfil: async (id, updatedData) => {
-				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/api/edit/${id}`, {  // Corregir URL
-						method: "PUT",
-						headers: {
-							"Content-Type": "application/json",
-							"Authorization": `Bearer ${localStorage.getItem('token')}`
-						},
-						body: JSON.stringify(updatedData)
-					});
-			
-					if (!response.ok) {
-						throw new Error("Error actualizando perfil");
-					}
-			
-					const data = await response.json();  // Corregir typo "reponse"
-			
-					const store = getStore();
-					
-					// Actualizar usuario en el store (asumiendo que store.user es el objeto del usuario logueado)
-					setStore({
-						user: {...store.user, ...data.user}  // Actualizar objeto directamente
-					});
-			
-					console.log("Perfil actualizado:", data);
-					return true;
-				} catch (error) {
-					console.error("Error actualizando el perfil:", error);
-					return false;
-				}
-			},
+
+			editarPerfil: async (updatedData) => {
+                const id = localStorage.getItem("id")
+                try {
+                    console.log(id)
+                    console.log(updatedData)
+                    const response = await fetch(`${process.env.BACKEND_URL}api/user/${id}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${localStorage.getItem('token')}`
+                        },
+                        body: JSON.stringify(updatedData)
+                    });
+                    if (!response.ok) {
+                        throw new Error("Error actualizando perfil");
+                    }
+                    const data = await response.json();
+                    const store = getStore();
+                    setStore({
+                        user: { ...store.user, ...data.user }  // Actualizar objeto directamente
+                    });
+                    console.log("Perfil actualizado:", data);
+                    return true;
+                } catch (error) {
+                    console.error("Error actualizando el perfil:", error);
+                    return false;
+                }
+            },
 
 		},
 	}
