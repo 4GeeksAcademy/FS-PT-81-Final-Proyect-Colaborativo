@@ -114,19 +114,19 @@ export const Home = () => {
 							 <form id="contactForm">
 								<div className="form-group">
 									<label htmlFor="nombre">Nombre:</label>
-									<input type="text" id="nombre" name="nombre" required/>
+									<input type="text" id="nombre" name="nombre" placeholder="EJ: Juan Perez" required/>
 										<div className="error" id="nombreError"></div>
 								</div>
 
 								<div className="form-group">
 									<label htmlFor="telefono">Teléfono:</label>
-									<input type="tel" id="telefono" name="telefono" required />
+									<input type="tel" id="telefono" name="telefono" placeholder="EJ: 624426878" required />
 									<div className="error" id="telefonoError"></div>
 								</div>
 
 								<div className="form-group">
 									<label htmlFor="email">Email:</label>
-									<input type="email" id="email" name="email" required />
+									<input type="email" id="email" name="email" placeholder="EJ: juanperez@agenpro.es" required />
 									<div className="error" id="emailError"></div>
 								</div>
 

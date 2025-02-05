@@ -245,12 +245,17 @@ body {
   }
 }
 
+.divbtnformulario{
+  padding: 0;
+}
+
 .enlacefooter {
   text-decoration: none;
 }
 
 .textoformulario{
   color: #000;
+  margin: 0;
 }
 
 .btnformulario{
@@ -359,6 +364,8 @@ body {
 label {
   display: block;
   margin-bottom: 5px;
+  text-align: left;
+
 }
 
 input, textarea {
