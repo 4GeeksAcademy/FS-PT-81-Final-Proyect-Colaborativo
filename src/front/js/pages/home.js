@@ -113,25 +113,25 @@ export const Home = () => {
 						<div className="divformularioconsulta">
 							 <form id="contactForm">
 								<div className="form-group">
-									<label for="nombre">Nombre:</label>
+									<label htmlFor="nombre">Nombre:</label>
 									<input type="text" id="nombre" name="nombre" required/>
 										<div className="error" id="nombreError"></div>
 								</div>
 
 								<div className="form-group">
-									<label for="telefono">Teléfono:</label>
+									<label htmlFor="telefono">Teléfono:</label>
 									<input type="tel" id="telefono" name="telefono" required />
 									<div className="error" id="telefonoError"></div>
 								</div>
 
 								<div className="form-group">
-									<label for="email">Email:</label>
+									<label htmlFor="email">Email:</label>
 									<input type="email" id="email" name="email" required />
 									<div className="error" id="emailError"></div>
 								</div>
 
 								<div className="form-group">
-									<label for="consulta">Consulta:</label>
+									<label htmlFor="consulta">Consulta:</label>
 									<textarea id="consulta" name="consulta" rows="1" required></textarea>
 									<div className="error" id="consultaError"></div>
 								</div>
