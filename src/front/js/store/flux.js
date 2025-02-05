@@ -18,8 +18,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Ejecutando getUserData")
 					const token = localStorage.getItem("token")
 					console.log("Token",token)
+
+					const id = localStorage.getItem("id")
+					if (!id) {
+						throw new Error("ID del usuario no encontrado en localStorage.");
+					}
+
 					
-					const resp = await fetch(${process.env.BACKEND_URL}api/user, {
+					const resp = await fetch(`${process.env.BACKEND_URL}api/user`, {
 						method: 'GET',
 						headers: {
 							'Authorization': Bearer ${token},
@@ -93,6 +99,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false;
 				}
 			},
+			
+
 			getUsers: async () => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + '/api/users')

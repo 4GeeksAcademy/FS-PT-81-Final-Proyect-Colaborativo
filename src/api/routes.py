@@ -25,11 +25,11 @@ def get_users():
 @api.route('/user', methods=['GET'])
 @jwt_required()
 def one_user():
-   id = get_jwt_identity()
-   exist = Users.query.filter_by(id=id).first()
+   email = get_jwt_identity()
+   exist = Users.query.filter_by(email=email).first()
    if exist is None:
-        return jsonify({"msg": f"No user found with id {exist.id}, the database might be empty"}), 404
-   return jsonify({"msg": "one user with id:" + str(id), "user": exist.serialize()}), 200
+        return jsonify({"msg": f"No user found with email {exist.email}, the database might be empty"}), 404
+   return jsonify({"msg": "one user with email:" + str(email), "user": exist.serialize()}), 200
 
 
 @api.route('/users', methods=['POST'])
@@ -59,25 +59,24 @@ def delete_user(id):
    return jsonify({"msg": "deleted user with id:" + str(id)}), 200
 
 
-
-@api.route('/user/<int:id>', methods=['PUT'])
-def update_user(id):
-   user = Users.query.get(id)
-   if user is None:
-    return jsonify ({"msg":"no user found with id:" + str(id)}), 404
-   data = request.json
+   email = data.get('email')
+   password  =data.get('password')
    name = data.get('name')
-   lastname  =data.get('lastname')
-   if not name and not lastname:
+   if not email and not password and not name:
       return jsonify({"msg": "at least one field ( email or password ) must be provided"}), 400
+   if email:
+      user.email = email
+   if password:
+      user.password = password
    if name:
       user.name = name
-   if lastname:
-      user.lastname = lastname
-      return jsonify ({"msg": "User with id {id} updated successfully", "user": user.serialize()}), 200
+
 
    db.session.commit()
-   return jsonify({"msg": f"User with id {id} updated successfully", "user": user.serialize()}), 200
+
+   return jsonify ({"msg": "User with id {id} updated successfully", "user": user.serialize()}), 200
+
+
    
 
 
