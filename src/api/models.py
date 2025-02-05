@@ -65,14 +65,10 @@ class GestorCitas(db.Model):
     __tablename__ = 'gestor_citas'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    empresa_id = db.Column(db.Integer, db.ForeignKey('empresas.id')) 
-    servicio_id = db.Column(db.Integer, db.ForeignKey('servicios.id'))
     fecha = db.Column(db.DateTime)
 
     # Relaciones
     user = db.relationship('Users', backref='gestor_citas', lazy=True)
-    servicio = db.relationship('Servicio', backref='gestor_citas', lazy=True)
-    empresa = db.relationship('Empresa', backref='gestor_citas', lazy=True)  
 
     def __repr__(self):
         return f'<GestorCitas {self.id}>'
@@ -80,6 +76,7 @@ class GestorCitas(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "user_id": self.user_id,
             "fecha": self.fecha.isoformat()
         }
 

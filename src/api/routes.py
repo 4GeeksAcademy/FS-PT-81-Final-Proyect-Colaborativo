@@ -217,17 +217,15 @@ def one_cita(id):
 
 @api.route('/citas', methods=['POST'])
 def create_cita():
-   fecha = request.json.get('fecha', None)
-   users = request.json.get('users', None)
-   if not fecha or not users:
-      return jsonify ({"msg":"All fields is required"}), 400
-   check = GestorCitas.query.filter_by(fecha=fecha).first()
-   if check:
-      return jsonify ({"msg":"User already exist"}), 400
-   new_cita = GestorCitas(fecha=fecha, users=users, is_active=True)
-   db.session.add(new_cita)
-   db.session.commit()
-   return jsonify({"msg": "OK", "data": new_cita.serialize()}), 201
+    fecha = request.json.get('fecha', None)
+    user_id = request.json.get('user_id', None)
+
+    if not fecha or not user_id:
+        return jsonify({"msg": "All fields are required"}), 400
+    new_cita = GestorCitas(fecha=fecha, user_id=user_id)
+    db.session.add(new_cita)
+    db.session.commit()
+    return jsonify({"msg": "OK", "data": new_cita.serialize()}), 201
 
 @api.route('/citas/<int:id>', methods=['DELETE'])
 def delete_cita(id):

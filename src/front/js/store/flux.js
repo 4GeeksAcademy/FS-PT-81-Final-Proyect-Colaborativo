@@ -333,7 +333,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const response = await fetch(process.env.BACKEND_URL + '/api/citas/' + id);
 					if (!response.ok) throw new Error("Error obteniendo la cita");
 					const data = await response.json();
-					setStore({ selectedCita: data.user });
+					setStore({ selectedCita: data });
 				} catch (error) {
 					console.error("Error obteniendo la cita por ID:", error);
 				}
