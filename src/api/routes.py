@@ -263,16 +263,18 @@ def register():
     email = request.json.get('email', None)
     password = request.json.get('password', None)
     name = request.json.get('name', None)
-    lastname = request.json.get('lastname', None)
+    is_active = request.json.get('is_active', None)
     if not email or not password or not name:
         return jsonify({"msg": "missing data"}), 400
     exist = Users.query.filter_by(email=email).first()
     if exist:
         return jsonify({"msg": "email taken"}), 400
     hashed_password = generate_password_hash(password)
-    new_user = Users(email=email, password=hashed_password, name=name, lastname=lastname)
+    new_user = Users(email=email, password=hashed_password, name=name, is_active=is_active)
+
     db.session.add(new_user)
     db.session.commit()
+
     token = create_access_token(identity=str(new_user.id))
     return jsonify({"msg": 'ok', 'token': token})
 

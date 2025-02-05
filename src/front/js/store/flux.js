@@ -50,7 +50,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error(error);
 				}
 			},
-			register: async formData => {
+			
+			register: async (formData) => {				
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + 'api/register', {
 						method: 'POST',
@@ -63,6 +64,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await resp.json()
 					console.log(data)
 					localStorage.setItem('token', data.token)
+					localStorage.setItem('id', data.id)
 					setStore({ auth: true, token: data.token, id: data.user.id })
 					return true
 				}

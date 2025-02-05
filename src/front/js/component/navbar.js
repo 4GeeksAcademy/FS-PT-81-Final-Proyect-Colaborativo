@@ -9,6 +9,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const { store, actions } = useContext(Context); // Accede al store y actions del flux
 
+  const token = store.token;
   // Función para manejar el inicio de sesión
   const handleLogin = () => {
     navigate("/login");
@@ -19,10 +20,16 @@ export const Navbar = () => {
     navigate("/elige");
   };
 
+  const handleHome = () => {
+    navigate("/");
+    actions.loginUser();
+  }
+
   // Función para manejar el cierre de sesión
   const handleLogout = () => {
     actions.logout(); // Llama a la acción de logout del flux
-    navigate("/"); // Redirige al inicio
+    navigate("/");
+    
   };
 
   const handleCuenta = () => {
@@ -58,7 +65,8 @@ export const Navbar = () => {
           </ul>
 
           {/* Mostrar los botones dependiendo del estado de autenticación */}
-          {!store.auth ? ( // Usa store.auth para verificar si el usuario está autenticado
+          
+          {!token ? ( // Usa store.auth para verificar si el usuario está autenticado
             <>
               <button className="btn btn-outline-primary mx-1" onClick={handleLogin}>
                 Iniciar Sesión
