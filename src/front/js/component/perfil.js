@@ -7,53 +7,15 @@ export const Perfil = () => {
   const { store, actions } = useContext(Context);
  const navigate = useNavigate()
   const [userData, setUserData] = useState({
-    name: ""
+    name: store.user?.name || ""
   });
 
-  // useEffect(() => {
-  //   const loadData = async () => {
-
-  //     if (!store.user) {  // Cambiar a store.user (singular)
-  //       await actions.getUserData();
-  //     }
-  //     // Actualizar estado con datos del store
-  //     setUserData({
-  //       email: store.user?.email || "",
-  //       password: "",  // Dejar vacío por seguridad
-  //       name: store.user?.name || "",
-  //     });
-  //     setLoading(false);
-  //   };
-  //   loadData();
-  // }, [store.user]);  // Dependencia de store.user
+  const navigate = useNavigate();
+  
   useEffect(() => {
     actions.getUserData();
   },[])
 
-  //     if (!store.user) {
-  //       try {
-  //         await actions.getUserData();  // Aseguramos que los datos se carguen si no están en el store
-  //       } catch (error) {
-  //         console.error("Error cargando datos:", error);
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     } else {
-  //       setUserData({
-  //         name: store.user.name,
-  //       });
-  //     }
-  //   };
-  
-  //   loadData();
-  // }, [store.user, actions]);
-  useEffect(() =>{
-    actions.getUserData();
-  },[]);
-
-  console.log(store.user)
-  console.log(store.id)
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
