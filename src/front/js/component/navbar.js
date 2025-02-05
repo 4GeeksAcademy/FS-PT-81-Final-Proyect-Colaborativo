@@ -20,10 +20,16 @@ export const Navbar = () => {
     navigate("/elige");
   };
 
+  const handleHome = () => {
+    navigate("/");
+    actions.loginUser();
+  }
+
   // Función para manejar el cierre de sesión
   const handleLogout = () => {
     actions.logout(); // Llama a la acción de logout del flux
-    navigate("/"); // Redirige al inicio
+    navigate("/");
+    
   };
 
   const handleCuenta = () => {
