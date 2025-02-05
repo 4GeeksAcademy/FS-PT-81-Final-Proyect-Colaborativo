@@ -25,21 +25,15 @@ export const Home = () => {
 				<h1 className="jumbotron_h1">AGENPRO</h1>
 				<h3 className="jumbotron_h3">La agenda rápida, simple y segura.</h3>
 			</div>
-
-			<section className="services-description fade-in-down">
-				<h2>¿Qué hacemos por ti?</h2>
-				<h3>
-					En AGENPRO, te ayudamos a gestionar tus citas de una manera rápida, simple y segura.
-					Ya no tendrás que preocuparte por perder tiempo en agendar tus compromisos. Con nuestra
-					agenda digital podrás organizar todas tus citas con facilidad, sin estrés, y de manera eficiente.
-				</h3>
-			</section>
-
+			<div className="services-description">
+				<h2>
+				AGENPRO te permite administrar tus citas de manera sencilla y sin preocupaciones.<br></br>
+				Con nuestra plataforma digital, mantén el control de tu agenda de forma ágil y totalmente segura.
+				</h2>
+			</div>
 			<div className="container-fluid m-0 p-0">
 				<div className="row">
 					<div className="col-sm-12 col-md-12 col-lg-6 col-xl-3 col-xxl-3 d-flex justify-content-center card_container">
-
-
 						<div className="card">
 							<img
 								src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=3431&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -101,17 +95,16 @@ export const Home = () => {
 					</div>
 				</div>
 
-				<div id="consultasnavbar" className="divdelfondopadre">
-					<div className="divizquierda p-2">
-					   <h1></h1>
+				<div id="consultasnavbar" className="d-flex row divdelfondopadre m-0">
+					<div className="divizquierda p-2 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 d-flex justify-content-center">
 						<div className="divimgmetodospago">
 							<img src="https://cdn.autobild.es/sites/navi.axelspringer.es/public/media/image/2016/05/543113-asi-funciona-google-maps-conexion-internet.jpg" className="imgmetodospago" />
 						</div>
 					</div>
-					<div className="divderecha p-2">
-						<h1>Contacto</h1>
+					<div className="divderecha p-2 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 d-flex justify-content-center">
 						<div className="divformularioconsulta">
 							 <form id="contactForm">
+							 	<h1 className="textoformulario">Contacto</h1>
 								<div className="form-group">
 									<label htmlFor="nombre">Nombre:</label>
 									<input type="text" id="nombre" name="nombre" placeholder="EJ: Juan Perez" required/>
