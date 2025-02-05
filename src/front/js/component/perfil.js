@@ -1,31 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
   const [userData, setUserData] = useState({
-    name: ""
+    name: store.user?.name || ""
   });
 
-  // useEffect(() => {
-  //   const loadData = async () => {
-  //     if (!store.user) {  // Cambiar a store.user (singular)
-  //       await actions.getUserData();
-  //     }
-  //     // Actualizar estado con datos del store
-  //     setUserData({
-  //       email: store.user?.email || "",
-  //       password: "",  // Dejar vacío por seguridad
-  //       name: store.user?.name || "",
-  //     });
-  //     setLoading(false);
-  //   };
-  //   loadData();
-  // }, [store.user]);  // Dependencia de store.user
+  const navigate = useNavigate();
+  
   useEffect(() => {
     actions.getUserData();
   },[])
+
+  // useEffect(() => {
+  //   setUserData((store.user?.name) || "")
+  // },[store.user])
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData(prev => ({ ...prev, [name]: value }));

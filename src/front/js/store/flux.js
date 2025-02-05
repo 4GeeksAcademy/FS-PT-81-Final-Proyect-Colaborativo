@@ -36,10 +36,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 					const data = await resp.json();
 					
-					localStorage.setItem('token', data.token); 
-					localStorage.setItem('id', data.user.id);
-
-					
 					setStore({ user: data.user });
 					console.log("Informacion de usuario", data);
 
@@ -86,16 +82,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					const data = await response.json();
 
-					// Guarda el token en localStorage y actualiza el estado global
 					localStorage.setItem("token", data.token);
-					localStorage.setItem("id", data.user.id)
+					localStorage.setItem("id", data.user.id);
 					setStore({ auth: true, token: data.token , id: data.user.id});
 
-					return true; // Indica que el login fue exitoso
+					return true; 
 				} 
 				catch (error) {
 					console.error("Error durante el login:", error);
-					return false; // Indica que el login falló
+					return false;
 				}
 			},
 			getUsers: async () => {
