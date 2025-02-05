@@ -19,7 +19,7 @@ export const Calendars = () => {
     }
   }, []);
 
-  // Función para validar datos
+
   const validateData = (uri, userId) => {
       if (!uri) {
           console.error("La URI no está definida. Verifica que se está pasando correctamente.");
@@ -69,16 +69,13 @@ export const Calendars = () => {
           console.error("Los datos de la cita no están completos:", appointmentData);
           return;
       }
-
-      // Formatear los datos para enviar al backend
       const formattedData = {
           fecha: appointmentData.start_time,
-          user_id: appointmentData.user_id, // Cambiamos "users" a "user_id" para coincidir con el modelo
+          user_id: appointmentData.user_id, 
       };
 
       console.log("Datos a enviar al backend:", formattedData);
 
-      // Enviar datos al backend
       fetch(`${process.env.BACKEND_URL}/api/citas`, {
           method: "POST",
           headers: {
@@ -94,8 +91,6 @@ export const Calendars = () => {
           .catch((err) => console.error("Error enviando datos al backend:", err));
   }, [appointmentData]);
 
-  
-  // UseCalendlyEventListener
   useCalendlyEventListener({
     onProfilePageViewed: () => console.log("onProfilePageViewed"),
     onDateAndTimeSelected: () => console.log("onDateAndTimeSelected"),
