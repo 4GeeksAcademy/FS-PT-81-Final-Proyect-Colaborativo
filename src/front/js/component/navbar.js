@@ -39,7 +39,7 @@ export const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
-      <div className="container-fluid justify-content-start mx-5">
+      <div className="container-fluid justify-content-between mx-5">
         <a className="navbar-brand" href="/">
           <img src={logonavbar} alt="AGENPRO" className="logonavbar" />
         </a>
@@ -61,12 +61,6 @@ export const Navbar = () => {
             </li>
             <li className="nav-item">
               <a className="nav-link navbarcoso" href="#consultasnavbar">Contacto</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link navbarcoso" href="#">ELEMENTO 3</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link navbarcoso" href="#">ELEMENTO 4</a>
             </li>
           </ul>
 

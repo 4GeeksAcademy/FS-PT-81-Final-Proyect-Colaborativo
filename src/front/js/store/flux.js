@@ -16,14 +16,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getUserData: async () => {
 				try {
 					console.log("Ejecutando getUserData")
+
 					const token = localStorage.getItem("token")
 					console.log("Token",token)
-					
+
+					const id = localStorage.getItem("id")
+					if (!id) {
+						throw new Error("ID del usuario no encontrado en localStorage.");
+					}
+
 					const resp = await fetch(`${process.env.BACKEND_URL}api/user`, {
 						method: 'GET',
 						headers: {
 							'Authorization': `Bearer ${token}`,
 							'Content-Type': 'application/json',
+
 						}
 					});
 			
@@ -95,6 +102,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false;
 				}
 			},
+						
+
 			getUsers: async () => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + '/api/users')
@@ -111,7 +120,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const response = await fetch(process.env.BACKEND_URL + '/api/user/' + id)
 					if (!response.ok) throw new Error("Error obteniendo el id del Usuario");
 					const data = await response.json();
-					return data.user;
+					
+					setStore({user: data.user});
 				} catch (error) {
 					console.error("Error obteniendo el ID del usuario:", error);
 				}
@@ -158,14 +168,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + '/api/user/' + id, {
 						method: "PUT",
-						headers: { "Content-Type": "application/json" },
+						headers: { "Content-Type": "application/json",
+							'Authorization': `Bearer ${localStorage.getItem('token')}`
+						 },
 						body: JSON.stringify({ email, password }),
 					});
 					if (!response.ok) throw new Error("Error actualizando al usuario");
 					const data = await response.json();
 					const store = getStore();
 					setStore({
-						users: store.user.map((user) => user.id === id ? { ...user, ...data.user } : user),
+						user: store.user.map((user) => user.id === id ? { ...user, ...data.user } : user),
 					});
 				} catch (error) {
 					console.error("error actualizando al usuario");
@@ -391,7 +403,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			verify: async (token) => {
 				try {
-					const response = await fetch(process.env.BACKEND_URL + "/api/verify" + token, {
+					const response = await fetch(process.env.BACKEND_URL + "/api/user" + token, {
 						method: "POST",
 						headers: {"Content-Type": "application/json"},
 						body: JSON.stringify(formData),
@@ -407,8 +419,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					localStorage.setItem("token", data.token);
 					getStore({auth: true, token: data.token});
 
-
-
 					return true;
 				}
 				catch(error) {
@@ -416,10 +426,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false;
 				}
 			},
+
 			logout: () => {
 				localStorage.removeItem("token"); // Elimina el token del localStorage
-				setStore({ auth: false, token: null }); // Actualiza el estado global
+				localStorage.removeItem("id"); 
+				setStore({ auth: false, token: null , id: null}); // Actualiza el estado global
 			},
+
 
 			editarPerfil: async (updatedData) => {
                 const id = localStorage.getItem("id")
@@ -449,6 +462,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return false;
                 }
             },
+
 		},
 	}
 };
