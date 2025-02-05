@@ -10,14 +10,14 @@ import "../../styles/home.css";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate();
-	
-	  const handleAgendarCita = () => {
-		if(!store.auth){
-		  navigate("/login", {state: {from:"/doctors"}})
-		}else {
-		  navigate("/doctors")
+
+	const handleAgendarCita = () => {
+		if (!store.auth) {
+			navigate("/login", { state: { from: "/doctors" } })
+		} else {
+			navigate("/doctors")
 		}
-	  }
+	}
 
 	return (
 		<>
@@ -29,22 +29,22 @@ export const Home = () => {
 			<section className="services-description fade-in-down">
 				<h2>¿Qué hacemos por ti?</h2>
 				<h3>
-					En AGENPRO, te ayudamos a gestionar tus citas de una manera rápida, simple y segura. 
-					Ya no tendrás que preocuparte por perder tiempo en agendar tus compromisos. Con nuestra 
+					En AGENPRO, te ayudamos a gestionar tus citas de una manera rápida, simple y segura.
+					Ya no tendrás que preocuparte por perder tiempo en agendar tus compromisos. Con nuestra
 					agenda digital podrás organizar todas tus citas con facilidad, sin estrés, y de manera eficiente.
 				</h3>
 			</section>
-			
-			<div className="container-fluid">
+
+			<div className="container-fluid m-0 p-0">
 				<div className="row">
 					<div className="col-sm-12 col-md-12 col-lg-6 col-xl-3 col-xxl-3 d-flex justify-content-center card_container">
 
-						
+
 						<div className="card">
 							<img
 								src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=3431&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 								className="card-img-top"
-							
+
 							/>
 							<div className="card-body">
 								<p className="card-text">LAVADERO</p>
@@ -57,7 +57,7 @@ export const Home = () => {
 							<img
 								src="https://sanicur.es/wp-content/uploads/2024/05/male-physiotherapist.jpg"
 								className="card-img-top"
-							
+
 							/>
 							<div className="card-body">
 								<p className="card-text">MASAJES</p>
@@ -70,7 +70,7 @@ export const Home = () => {
 							<img
 								src="https://cdn.pixabay.com/photo/2019/03/08/20/17/beauty-salon-4043096_640.jpg"
 								className="card-img-top"
-							
+
 							/>
 							<div className="card-body">
 								<p className="card-text">PELUQUERIA</p>
@@ -83,7 +83,7 @@ export const Home = () => {
 							<img
 								src="https://547fdc8a.delivery.rocketcdn.me/wp-content/uploads/2021/08/27-1-677x400.jpg"
 								className="card-img-top"
-							
+
 							/>
 							<div className="card-body">
 								<p className="card-text">UÑAS</p>
@@ -101,12 +101,44 @@ export const Home = () => {
 					</div>
 				</div>
 
-				
+				<div id="consultasnavbar" className="divdelfondopadre">
+					<div className="divizquierda p-2">
+					   <h1>Un mapa de madrid simulando que es google maps</h1>
+						<div className="divimgmetodospago">
+							<img src="https://cdn.autobild.es/sites/navi.axelspringer.es/public/media/image/2016/05/543113-asi-funciona-google-maps-conexion-internet.jpg" className="imgmetodospago" />
+						</div>
+					</div>
+					<div className="divderecha p-2">
+						<h1>Contacto</h1>
+						<div className="divformularioconsulta">
+							 <form id="contactForm">
+								<div className="form-group">
+									<label for="nombre">Nombre:</label>
+									<input type="text" id="nombre" name="nombre" required/>
+										<div className="error" id="nombreError"></div>
+								</div>
 
-				<div>
-					<div id="consultasnavbar" className="d-flex flex-column justify-content-center align-items-center my-4 divdelfondo">
-						<h1>AGENPRO es tu agenda digital sin estrés. ¿Listo para evolucionar?</h1>
-						<h1>%$%$%$ TOCANDO LA OPCION DE CONTACTO DEL NAVBAR TE TRAE A ESTA SECCION, ACA VA UN FORMULARIO PARA QUE RELLENEN LOS CLIENTES CON CONSULTAS, PARA HACER MAS BULTO EN LA PAGINA Y DEJARLA MAS LARGA Y TAMBIEN PODRIA IR UNA IMAGEN PARA DARLE MEJOR VISTA, EL COLOR DEL FOOTER ES MOMENTANEO ESCRIBO COSAS PARA DARLE ESPACIO, NO SE QUE HACES LEYENDO ESTO %$%$%$</h1>
+								<div className="form-group">
+									<label for="telefono">Teléfono:</label>
+									<input type="tel" id="telefono" name="telefono" required />
+									<div className="error" id="telefonoError"></div>
+								</div>
+
+								<div className="form-group">
+									<label for="email">Email:</label>
+									<input type="email" id="email" name="email" required />
+									<div className="error" id="emailError"></div>
+								</div>
+
+								<div className="form-group">
+									<label for="consulta">Consulta:</label>
+									<textarea id="consulta" name="consulta" rows="1" required></textarea>
+									<div className="error" id="consultaError"></div>
+								</div>
+
+								<button className="btn btn-outline-primary">Enviar</button>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>

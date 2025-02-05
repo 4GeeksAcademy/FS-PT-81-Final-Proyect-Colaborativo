@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
+ const navigate = useNavigate()
   const [userData, setUserData] = useState({
     name: store.user?.name || ""
   });
@@ -15,9 +16,6 @@ export const Perfil = () => {
     actions.getUserData();
   },[])
 
-  // useEffect(() => {
-  //   setUserData((store.user?.name) || "")
-  // },[store.user])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,11 +24,13 @@ export const Perfil = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     actions.editarPerfil(userData);
     navigate("/cuenta")
   };
 
   console.log(store.user);
+
   return (
     <div className="container mt-5">
       <h2>Editar Perfil</h2>
@@ -42,14 +42,14 @@ export const Perfil = () => {
             type="text"
             className="form-control"
             name="name"
-            value={userData.name}
+            value={store.user?.name}
             onChange={handleChange}
             required
           />
         </div>
 
 
-        <button type="submit" className="btn btn-primary">
+        <button className="btn btn-primary" type="submit">
           Actualizar
         </button>
       </form>

@@ -26,7 +26,6 @@ export const Navbar = () => {
   };
 
   const handleCuenta = () => {
-
     navigate("/cuenta")
   }
 
@@ -55,12 +54,6 @@ export const Navbar = () => {
             </li>
             <li className="nav-item">
               <a className="nav-link navbarcoso" href="#consultasnavbar">Contacto</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link navbarcoso" href="#">ELEMENTO 3</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link navbarcoso" href="#">ELEMENTO 4</a>
             </li>
           </ul>
 
