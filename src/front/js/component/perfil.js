@@ -8,10 +8,7 @@ export const Perfil = () => {
  const navigate = useNavigate()
   const [userData, setUserData] = useState({
     name: store.user?.name || ""
-  });
-
-  const navigate = useNavigate();
-  
+  });  
   useEffect(() => {
     actions.getUserData();
   },[])

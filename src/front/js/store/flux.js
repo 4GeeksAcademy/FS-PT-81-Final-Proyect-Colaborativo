@@ -24,9 +24,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (!id) {
 						throw new Error("ID del usuario no encontrado en localStorage.");
 					}
-					const token = localStorage.getItem("token")
-
-					
 					const resp = await fetch(`${process.env.BACKEND_URL}api/user`, {
 						method: 'GET',
 						headers: {
@@ -102,21 +99,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false;
 				}
 			},
-							
-						}
-					});
-			
-					const data = await resp.json();
-					
-					localStorage.setItem('token', data.token,); 
-					console.log("Informacion de usuario", data);
-					setStore({ user: data.user });
-					return data.user;
-				} catch (error) {
-					console.error(error);
-				}
-			},
-			
+						
 
 			getUsers: async () => {
 				try {
