@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
- const navigate = useNavigate()
+  const navigate = useNavigate()
   const [userData, setUserData] = useState({
     name: store.user?.name || ""
-  });  
+  });
   useEffect(() => {
     actions.getUserData();
-  },[])
+  }, [])
 
 
   const handleChange = (e) => {
@@ -45,10 +45,14 @@ export const Perfil = () => {
           />
         </div>
 
-
-        <button className="btn btn-primary" type="submit">
-          Actualizar
-        </button>
+        <div className="d-flex justify-content-center mx-1 gap-1px">
+          <button className="btn btn-primary" type="submit">
+            Actualizar
+          </button>
+          <button className="btn btn-primary" type="submit">
+            Actualizar
+          </button>
+        </div>
       </form>
     </div>
   );
