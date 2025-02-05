@@ -103,7 +103,7 @@ export const Home = () => {
 
 				<div id="consultasnavbar" className="divdelfondopadre">
 					<div className="divizquierda p-2">
-					   <h1>Un mapa de madrid simulando que es google maps</h1>
+					   <h1></h1>
 						<div className="divimgmetodospago">
 							<img src="https://cdn.autobild.es/sites/navi.axelspringer.es/public/media/image/2016/05/543113-asi-funciona-google-maps-conexion-internet.jpg" className="imgmetodospago" />
 						</div>
@@ -131,12 +131,12 @@ export const Home = () => {
 								</div>
 
 								<div className="form-group">
-									<label htmlFor="consulta">Consulta:</label>
-									<textarea id="consulta" name="consulta" rows="1" required></textarea>
-									<div className="error" id="consultaError"></div>
+									<h4 className="textoformulario">Nos comunicaremos contigo a la brevedad
+									</h4>
+									<div className="btnformulario">
+									<button className="btn btn-primary">Enviar</button>
+									</div>
 								</div>
-
-								<button className="btn btn-outline-primary">Enviar</button>
 							</form>
 						</div>
 					</div>
