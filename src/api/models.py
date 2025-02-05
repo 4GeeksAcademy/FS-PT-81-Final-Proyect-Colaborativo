@@ -46,29 +46,30 @@ class Empresa(db.Model):
 class Servicio(db.Model):
     __tablename__ = 'servicios'
     id = db.Column(db.Integer, primary_key=True)
-    nombre_servicio = db.Column(db.String(100))
-    descripcion = db.Column(db.String(250))
-    precio = db.Column(db.Integer)
+    nombre_servicio = db.Column(db.String(100), nullable=False)  # Nombre es obligatorio
+    descripcion = db.Column(db.String(250), nullable=True)  # Descripción es opcional
 
     def __repr__(self):
-        return f'<nombre_servicio {self.nombre_servicio}>'
+        return f'<Servicio {self.nombre_servicio}>'
 
     def serialize(self):
         return {
             "id": self.id,
             "nombre_servicio": self.nombre_servicio,
-            "descripcion": self.descripcion,
-            "precio": self.precio,
+            "descripcion": self.descripcion,  # Incluir descripción solo si existe
         }
 
 class GestorCitas(db.Model):
     __tablename__ = 'gestor_citas'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    servicio_id = db.Column(db.Integer, db.ForeignKey('servicios.id'))
+    nombre_servicio = db.Column(db.String(120))
     fecha = db.Column(db.DateTime)
 
     # Relaciones
     user = db.relationship('Users', backref='gestor_citas', lazy=True)
+    servicio = db.relationship('Servicio', backref='gestor_citas', lazy=True)
 
     def __repr__(self):
         return f'<GestorCitas {self.id}>'
@@ -77,6 +78,8 @@ class GestorCitas(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
+            "servicio_id": self.servicio_id,
+            "nombre_servicio": self.nombre_servicio,
             "fecha": self.fecha.isoformat()
         }
 

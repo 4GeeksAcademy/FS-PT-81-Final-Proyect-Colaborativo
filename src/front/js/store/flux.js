@@ -11,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			id: null,
 			name: null,
+			selectedCita: null,
 		},
 		actions: {
 			getUserData: async () => {
@@ -328,12 +329,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			getCitaById: async (id) => {
+			getCitaById: async (userId) => {
+				setStore({ loading: true });
 				try {
-					const response = await fetch(process.env.BACKEND_URL + '/api/citas/' + id);
+					const response = await fetch(`${process.env.BACKEND_URL}/api/citas/${userId}`);
 					if (!response.ok) throw new Error("Error obteniendo la cita");
 					const data = await response.json();
-					setStore({ selectedCita: data });
+					setStore({ selectedCita: data.data, loading: false });
 				} catch (error) {
 					console.error("Error obteniendo la cita por ID:", error);
 				}

@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useCalendlyEventListener, InlineWidget } from "react-calendly";
 import "../../styles/calendar.css";
+
 
 export const Calendars = () => {
   const [uri, setUri] = useState('');
   const [appointmentData, setAppointmentData] = useState(null);
   const [userId, setUserId] = useState(null);
+  const selectedService = localStorage.getItem("selectedService");
+  const selectedServiceId = localStorage.getItem("selectedServiceId");
+  
+  console.log("Servicio recuperado:", selectedService);
 
   console.log("Valor de uri recibido:", uri);
   console.log("Valor de userId recibido:", userId);
@@ -71,7 +76,9 @@ export const Calendars = () => {
       }
       const formattedData = {
           fecha: appointmentData.start_time,
-          user_id: appointmentData.user_id, 
+          user_id: appointmentData.user_id,
+          nombre_servicio: selectedService, 
+          servicio_id: selectedServiceId,
       };
 
       console.log("Datos a enviar al backend:", formattedData);

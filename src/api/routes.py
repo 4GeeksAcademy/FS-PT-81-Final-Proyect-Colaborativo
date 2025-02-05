@@ -152,24 +152,31 @@ def one_servicio(id):
 
 @api.route('/service', methods=['POST'])
 def create_service():
+    # Obtener datos del JSON
+    nombre_servicio = request.json.get('nombre_servicio', None)
+    descripcion = request.json.get('descripcion', None)  # Opcional
 
-   servicio = request.json.get('servicio', None)
-   descripcion = request.json.get('descripcion', None)
-   precio = request.json.get('precio', None)
+    # Validar campo obligatorio
+    if not nombre_servicio:
+        return jsonify({"msg": "El campo 'nombre_servicio' es obligatorio"}), 400
 
-   if not servicio or not descripcion or not precio:
-      return jsonify ({"msg":"All fields is required"}), 400
-   
-   check = Servicio.query.filter_by(servicio=servicio).first()
+    # Verificar si el servicio ya existe
+    check = Servicio.query.filter_by(nombre_servicio=nombre_servicio).first()
+    if check:
+        return jsonify({"msg": "El servicio ya existe"}), 400
 
-   if check:
-      return jsonify ({"msg":"Service already exist"}), 400
-   
-   new_service = Servicio(servicio=servicio, descripcion=descripcion, precio=precio)
-   db.session.add(new_service)
-   db.session.commit()
+    # Crear el nuevo servicio
+    new_service = Servicio(
+        nombre_servicio=nombre_servicio,
+        descripcion=descripcion  # Puede ser None
+    )
 
-   return jsonify({"msg": "OK", "data": new_service.serialize()}), 201
+    # Guardar en la base de datos
+    db.session.add(new_service)
+    db.session.commit()
+
+    # Retornar respuesta
+    return jsonify({"msg": "Servicio creado exitosamente", "data": new_service.serialize()}), 201
 
 @api.route('/service/<int:id>', methods=['DELETE'])
 def delete_service(id):
@@ -208,23 +215,38 @@ def get_cita():
    return jsonify ({"msg":"Ok", "data":citas}), 200
 
 @api.route('/citas/<int:id>', methods=['GET'])
-def one_cita(id):
-   citas = GestorCitas.query.get(id)
-   if citas is None:
-        return jsonify({"msg": "No user found with id {id}, the data base might be empty"}), 404
-   print(citas)
-   return jsonify({"msg": "one user with id:" + str(id), "user":citas.serialize()}), 200
+def one_cita(user_id):
+   try:
+        citas = GestorCitas.query.filter_by(user_id=user_id).all()
+        if not citas:
+            return jsonify({"msg": f"No se encontraron citas para el usuario con ID {user_id}"}), 404
+        citas_serializadas = [cita.serialize() for cita in citas]
+        return jsonify({"msg": "OK", "data": citas_serializadas}), 200
+   except Exception as e:
+        # Manejar errores inesperados
+        return jsonify({"msg": "Error al obtener las citas", "error": str(e)}), 500
+
 
 @api.route('/citas', methods=['POST'])
 def create_cita():
     fecha = request.json.get('fecha', None)
     user_id = request.json.get('user_id', None)
+    nombre_servicio = request.json.get('nombre_servicio', None)
+    servicio_id = request.json.get('servicio_id', None)
 
-    if not fecha or not user_id:
+    if not fecha or not user_id or not nombre_servicio or not servicio_id:
         return jsonify({"msg": "All fields are required"}), 400
-    new_cita = GestorCitas(fecha=fecha, user_id=user_id)
+
+    new_cita = GestorCitas(
+        fecha=fecha,
+        user_id=user_id,
+        nombre_servicio=nombre_servicio,
+        servicio_id=servicio_id
+    )
+
     db.session.add(new_cita)
     db.session.commit()
+
     return jsonify({"msg": "OK", "data": new_cita.serialize()}), 201
 
 @api.route('/citas/<int:id>', methods=['DELETE'])

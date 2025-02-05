@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom"; 
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import "../../styles/doctorCard.css";
 
 const doctors = [
@@ -36,38 +36,48 @@ const doctors = [
 ];
 
 export const DoctorCards = () => {
-  const [selectedDoctor, setSelectedDoctor] = useState(null);
+    const [selectedDoctor, setSelectedDoctor] = useState(null);
 
-  const handleCardClick = (doctorId) => {
-      setSelectedDoctor(doctorId === selectedDoctor ? null : doctorId); // Cambia la selección
-  };
+    const handleCardClick = (doctor) => {
+        setSelectedDoctor(doctor.id === selectedDoctor ? null : doctor.id); // Cambia la selección
+        localStorage.setItem("selectedService", doctor.name); // Guarda el servicio en localStorage
+        localStorage.setItem("selectedServiceId", doctor.id);
+        console.log("Servicio guardado en localStorage:", doctor.name, doctor.id);
+    };
 
-  return (
-      <div className="container">
-          <div className="row">
-              {doctors.map((doctor) => (
-                  <div key={doctor.id} className="col-md-3 mb-4">
-                      <div
-                          className={`card ${selectedDoctor === doctor.id ? "selected" : ""}`}
-                          onClick={() => handleCardClick(doctor.id)}
-                      >
-                          <div className="card-body">
-                              <h5 className="card-title">{doctor.name}</h5>
-                              <img
-                                src={doctor.image}
-                                alt={doctor.name}
-                                className="card-img-top" // Estilo de la imagen en la parte superior de la tarjeta
-                            />
-                              <p className="card-text">{doctor.title}</p>
-                              <p className="card-text">{doctor.especialidad}</p>
-                              <Link to={`/calendar/${doctor.id}`} className="btn btn-primary">
-                                  AGENDAR CITA
-                              </Link>
-                          </div>
-                      </div>
-                  </div>
-              ))}
-          </div>
-      </div>
-  );
+    return (
+        <div className="container">
+            <div className="row">
+                {doctors.map((doctor) => (
+                    <div key={doctor.id} className="col-md-3 mb-4">
+                        <div
+                            className={`card ${selectedDoctor === doctor.id ? "selected" : ""}`}
+                            onClick={() => handleCardClick(doctor)}
+                        >
+                            <div className="card-body">
+                                <h5 className="card-title">{doctor.name}</h5>
+                                <img
+                                    src={doctor.image}
+                                    alt={doctor.name}
+                                    className="card-img-top" // Estilo de la imagen en la parte superior de la tarjeta
+                                />
+                                <p className="card-text">{doctor.title}</p>
+                                <p className="card-text">{doctor.especialidad}</p>
+                                <Link to={`/calendar/${doctor.id}`} className="btn btn-primary" onClick={() => {
+                                    localStorage.setItem("selectedService", doctor.name);
+                                    localStorage.setItem("selectedServiceId", doctor.id);
+                                    setTimeout(() => {
+                                        console.log("Servicio guardado con retraso:", localStorage.getItem("selectedService"));
+                                        console.log("Servicio guardado con retraso:", localStorage.setItem("selectedServiceId"));
+                                    }, 100);  // Retraso de 100 ms
+                                }}>
+                                    AGENDAR CITA
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
 };
