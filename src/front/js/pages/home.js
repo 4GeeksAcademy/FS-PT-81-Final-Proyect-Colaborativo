@@ -27,7 +27,7 @@ export const Home = () => {
 			</div>
 			<div className="services-description">
 				<h2>
-				AGENPRO te permite administrar tus citas de manera sencilla y sin preocupaciones.<br></br>
+				En AGENPRO simplificamos la gestion de tus citas.<br></br>
 				Con nuestra plataforma digital, mantén el control de tu agenda de forma ágil y totalmente segura.
 				</h2>
 			</div>
