@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
- const navigate = useNavigate()
+  const navigate = useNavigate()
   const [userData, setUserData] = useState({
     name: store.user?.name || ""
   });
 
-   useEffect(() => {
+  useEffect(() => {
     actions.getUserData();
-  },[])
+  }, [])
 
   // useEffect(() => {
   //   setUserData((store.user?.name) || "")
@@ -35,7 +35,9 @@ export const Perfil = () => {
     <div className="container mt-5">
       <h2>Editar Perfil</h2>
       <form onSubmit={handleSubmit}>
-
+        <div className="mb-3">
+          <h3>Bienvenido, {store.user?.name || "Usuario"}</h3> {/* Mostrar el nombre del usuario */}
+        </div>
         <div className="mb-3">
           <label>Nombre</label>
           <input
