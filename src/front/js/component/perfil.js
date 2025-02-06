@@ -10,7 +10,7 @@ export const Perfil = () => {
     name: store.user?.name || ""
   });
 
-  const navigate = useNavigate();
+ 
 
   useEffect(() => {
     actions.getUserData();
