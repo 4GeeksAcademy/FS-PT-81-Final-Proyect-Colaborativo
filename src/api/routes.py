@@ -11,6 +11,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 api = Blueprint('api', __name__)
 
 
+
+
 CORS(api)
 
 
@@ -22,14 +24,13 @@ def get_users():
 
 @api.route('/user', methods=['GET'])
 @jwt_required()
-def one_user(): 
-   id = get_jwt_identity()
-   print({request.headers})
-   print(id)
-   user = Users.query.get(id)  
-   if user is None:
-        return jsonify({"msg": f"No user found with id {id}, the database might be empty"}), 404
-   return jsonify({"msg": "one user with id:" + str(id), "user": user.serialize()}), 200
+def one_user():
+   email = get_jwt_identity()
+   exist = Users.query.filter_by(email=email).first()
+   if exist is None:
+        return jsonify({"msg": f"No user found with email {exist.email}, the database might be empty"}), 404
+   return jsonify({"msg": "one user with email:" + str(email), "user": exist.serialize()}), 200
+
 
 @api.route('/users', methods=['POST'])
 def create_user():
@@ -41,7 +42,9 @@ def create_user():
    check = Users.query.filter_by(email=email).first()
    if check:
       return jsonify ({"msg":"User already exist"}), 400
+
    new_user = Users(email=email, password=password, name=name, is_active=True)
+
    db.session.add(new_user)
    db.session.commit()
    return jsonify({"msg": "OK", "data": new_user.serialize()}), 201
@@ -56,25 +59,24 @@ def delete_user(id):
    return jsonify({"msg": "deleted user with id:" + str(id)}), 200
 
 
-
-@api.route('/user/<int:id>', methods=['PUT'])
-def update_user(id):
-   user = Users.query.get(id)
-   if user is None:
-    return jsonify ({"msg":"no user found with id:" + str(id)}), 404
-   data = request.json
+   email = data.get('email')
+   password  =data.get('password')
    name = data.get('name')
-   lastname  =data.get('lastname')
-   if not name and not lastname:
+   if not email and not password and not name:
       return jsonify({"msg": "at least one field ( email or password ) must be provided"}), 400
+   if email:
+      user.email = email
+   if password:
+      user.password = password
    if name:
       user.name = name
-   if lastname:
-      user.lastname = lastname
-      return jsonify ({"msg": "User with id {id} updated successfully", "user": user.serialize()}), 200
+
 
    db.session.commit()
-   return jsonify({"msg": f"User with id {id} updated successfully", "user": user.serialize()}), 200
+
+   return jsonify ({"msg": "User with id {id} updated successfully", "user": user.serialize()}), 200
+
+
    
 
 
@@ -153,17 +155,23 @@ def one_servicio(id):
 
 @api.route('/service', methods=['POST'])
 def create_service():
+
    servicio = request.json.get('servicio', None)
    descripcion = request.json.get('descripcion', None)
    precio = request.json.get('precio', None)
+
    if not servicio or not descripcion or not precio:
       return jsonify ({"msg":"All fields is required"}), 400
+   
    check = Servicio.query.filter_by(servicio=servicio).first()
+
    if check:
       return jsonify ({"msg":"Service already exist"}), 400
+
    new_service = Servicio(servicio=servicio, descripcion=descripcion, precio=precio)
    db.session.add(new_service)
    db.session.commit()
+
    return jsonify({"msg": "OK", "data": new_service.serialize()}), 201
 
 @api.route('/service/<int:id>', methods=['DELETE'])
@@ -254,16 +262,19 @@ def update_cita(id):
 def register():
     email = request.json.get('email', None)
     password = request.json.get('password', None)
-
-    if not email or not password:
+    name = request.json.get('name', None)
+    is_active = request.json.get('is_active', None)
+    if not email or not password or not name:
         return jsonify({"msg": "missing data"}), 400
     exist = Users.query.filter_by(email=email).first()
     if exist:
         return jsonify({"msg": "email taken"}), 400
     hashed_password = generate_password_hash(password)
-    new_user = Users(email=email, password=hashed_password, is_active=True)
+    new_user = Users(email=email, password=hashed_password, name=name, is_active=is_active)
+
     db.session.add(new_user)
     db.session.commit()
+
     token = create_access_token(identity=str(new_user.id))
     return jsonify({"msg": 'ok', 'token': token})
 
@@ -272,20 +283,17 @@ def register():
 def login():
     email = request.json.get('email', None)
     password = request.json.get('password', None)
-
     if not email or not password:
         return jsonify({"msg": "missing data"}), 400
     exist = Users.query.filter_by(email=email).first()
     if not exist:
         return jsonify({"msg": "user doesnt exist"}), 400
-    
+
     check_password_hash(exist.password, password)
-    
     if not check_password_hash:
         return jsonify({"msg": "Incorrect password"}), 400
+    token = create_access_token(identity=exist.email)
 
-   
-    token = create_access_token(identity=exist.id)
     return jsonify({"msg": 'ok', 'token': token, "user": exist.serialize()})
 
 @api.route('/protected', methods=['GET'])

@@ -5,68 +5,53 @@ import { useNavigate } from "react-router-dom";
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
- const navigate = useNavigate()
+  const navigate = useNavigate()
   const [userData, setUserData] = useState({
-    name: ""
+    name: store.user?.name || ""
   });
 
-  // useEffect(() => {
-  //   const loadData = async () => {
-  //     if (!store.user) {
-  //       try {
-  //         await actions.getUserData();  // Aseguramos que los datos se carguen si no están en el store
-  //       } catch (error) {
-  //         console.error("Error cargando datos:", error);
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     } else {
-  //       setUserData({
-  //         name: store.user.name,
-  //       });
-  //     }
-  //   };
-  
-  //   loadData();
-  // }, [store.user, actions]);
-  useEffect(() =>{
+  useEffect(() => {
     actions.getUserData();
-  },[]);
+  }, [])
 
-  console.log(store.user)
-  console.log(store.id)
-  
+  // useEffect(() => {
+  //   setUserData((store.user?.name) || "")
+  // },[store.user])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserData(prev => ({ ...prev, [name]: value }));
+    setUserData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    actions.editarPerfil(store.id, userData);
-    navigate("/cuenta")
-    
+
+    actions.editarPerfil(userData);
+    navigate("/cuenta");
   };
 
+  console.log(store.user);
   return (
     <div className="container mt-5">
       <h2>Editar Perfil</h2>
       <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <h3>Bienvenido, {store.user?.name || "Usuario"}</h3> {/* Mostrar el nombre del usuario */}
+        </div>
         <div className="mb-3">
           <label>Nombre</label>
           <input
             type="text"
             className="form-control"
             name="name"
-            value={store.user?.name}
+            value={userData.name}
             onChange={handleChange}
             required
           />
         </div>
 
 
-        <button className="btn btn-primary" type="submit">
+        <button type="submit" className="btn btn-primary">
           Actualizar
         </button>
       </form>

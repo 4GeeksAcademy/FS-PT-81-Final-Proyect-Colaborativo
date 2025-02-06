@@ -11,6 +11,7 @@ export const Formulary = () => {
     lastname: "",
     email: "",
     password: "",
+    is_active: true
   });
 
   const handleChange = (e) => {
@@ -20,7 +21,9 @@ export const Formulary = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (actions.register(formData)) navigate("/doctors")
+    if (actions.register(formData)) 
+    navigate("/")
+    alert("Registro Completado");
     console.log("User registered:", formData);
   };
 
