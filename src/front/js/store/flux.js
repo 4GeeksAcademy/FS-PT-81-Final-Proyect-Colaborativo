@@ -143,18 +143,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			deleteUser: async (id) => {
-				try {
-					const response = await fetch(process.env.BACKEND_URL + '/api/user/' + id, {
-						method: "DELETE"
-					});
-					if (!response.ok) throw new Error("Error borrando al usuario");
-					const store = getStore();
-					setStore({ users: store.users.filter((user) => user.id !== id) });
-				} catch (error) {
-					console.error("Error Borrando al usuario:", error);
+                try {
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/users/${id}`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization":`Bearer ${localStorage.getItem("token")}`
+                        }
+                    });
+                    if (!response.ok) throw new Error("Error borrando al usuario");
+                    const store = getStore();
+                    setStore({ users: store.users.filter((user) => user.id !== id) });
+                } catch (error) {
+                    console.error("Error Borrando al usuario:", error);
 
-				}
-			},
+                }
+            },
+			
 			updateUser: async (id, email, password) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + '/api/user/' + id, {

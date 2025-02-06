@@ -25,6 +25,19 @@ export const Perfil = () => {
     actions.editarPerfil(userData);
     navigate("/cuenta");
   };
+  const handleDeleteUser = async () => {
+    const userId = store.user.id;
+    try {
+      const response = await actions.deleteUser(userId);
+      if (response.ok) {
+        navigate("/");
+      } else {
+        console.error("No se pudo eliminar el usuario:", response);
+      }
+    } catch (error) {
+      console.error("Error eliminando usuario:", error);
+    }
+  };
 
   return (
     <div className="container mt-5">
@@ -39,7 +52,7 @@ export const Perfil = () => {
                   <label htmlFor="name" className="form-label">
                     Nombre
                   </label>
-                  
+
                   <input
                     type="text"
                     className="form-control form-control-lg"
@@ -54,6 +67,9 @@ export const Perfil = () => {
                 <div className="d-grid gap-2">
                   <button type="submit" className="btn btn-primary btn-lg">
                     Actualizar Perfil
+                  </button>
+                  <button className="btn btn-primary" onClick={() => handleDeleteUser()}>
+                    Eliminar cuenta
                   </button>
                 </div>
               </form>

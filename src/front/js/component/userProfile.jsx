@@ -13,21 +13,35 @@ const UserProfile = () => {
     }, []);
 
     // Muestra un mensaje de carga mientras se obtienen los datos
-    if (!user) return <div>Loading...</div>;
-
+    if (!user) {return (
+        <div className="d-flex justify-content-center align-items-center vh-100">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+      );
+    }
     // Muestra los datos del usuario si todo está correcto
     return (
-        <div>
-            <h1>User Profile</h1>
-            {user && (
-                <div>
-                    <p><strong>Name:</strong> {user.name}</p>
-                    <p><strong>Email:</strong> {user.email}</p>
-                    
+        <div className="container mt-5">
+          <div className="row justify-content-center">
+            <div className="col-md-6">
+              <div className="card shadow-lg">
+                <div className="card-body text-center">
+                  <h2 className="card-title mb-4">👤 Perfil de Usuario</h2>
+                  {user ? (
+                    <>
+                      <p className="fw-bold">📝 Nombre: <span className="text-primary">{user.name}</span></p>
+                      <p className="fw-bold">📧 Correo: <span className="text-muted">{user.email}</span></p>
+                    </>
+                  ) : (
+                    <p className="text-danger">No se encontró información del usuario.</p>
+                  )}
                 </div>
-            )}
+              </div>
+            </div>
+          </div>
         </div>
-    );
-};
-
+      );
+    };
 export default UserProfile;

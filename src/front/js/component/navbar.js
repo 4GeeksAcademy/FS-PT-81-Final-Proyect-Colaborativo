@@ -63,7 +63,7 @@ export const Navbar = () => {
               <a className="nav-link navbarcoso" href="#consultasnavbar">Contacto</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link navbarcoso" href="#">ELEMENTO 3</a>
+              <a className="nav-link navbarcoso" href="/perfilcliente"> Perfil y Citas </a>
             </li>
             <li className="nav-item">
               <a className="nav-link navbarcoso" href="#">ELEMENTO 4</a>

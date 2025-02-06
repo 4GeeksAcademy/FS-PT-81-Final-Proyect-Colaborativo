@@ -106,7 +106,6 @@ export const Home = () => {
 				<div>
 					<div id="consultasnavbar" className="d-flex flex-column justify-content-center align-items-center my-4 divdelfondo">
 						<h1>AGENPRO es tu agenda digital sin estrés. ¿Listo para evolucionar?</h1>
-						<h1>%$%$%$ TOCANDO LA OPCION DE CONTACTO DEL NAVBAR TE TRAE A ESTA SECCION, ACA VA UN FORMULARIO PARA QUE RELLENEN LOS CLIENTES CON CONSULTAS, PARA HACER MAS BULTO EN LA PAGINA Y DEJARLA MAS LARGA Y TAMBIEN PODRIA IR UNA IMAGEN PARA DARLE MEJOR VISTA, EL COLOR DEL FOOTER ES MOMENTANEO ESCRIBO COSAS PARA DARLE ESPACIO, NO SE QUE HACES LEYENDO ESTO %$%$%$</h1>
 					</div>
 				</div>
 			</div>
