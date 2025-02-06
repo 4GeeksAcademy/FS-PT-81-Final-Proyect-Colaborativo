@@ -1,11 +1,11 @@
-import React from "react";
+import React, { use, useContext, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
-import injectContext from "./store/appContext";
+import injectContext, { Context } from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Registro } from "./pages/registro.jsx";
@@ -24,7 +24,18 @@ import { PerfilCliente } from "./pages/perfilcliente.jsx";
 
 
 const Layout = () => {
+    const { store, actions } = useContext(Context);
 
+    // Recupera el token y el ID al cargar la página
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const id = localStorage.getItem("id");
+  
+      if (token && id) {
+        actions.setAuthState(token, id); // Llama a una acción del flux para actualizar el estado
+      }
+    }, []);
+  
     const basename = process.env.BASENAME || "";
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;

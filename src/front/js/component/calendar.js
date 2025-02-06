@@ -107,8 +107,11 @@ export const Calendars = () => {
   });
 
   return (
-    <>
-      <h1>Calendario y Citas</h1>
+    <> <div  className="d-flex justify-content-center ">
+
+    <h1>Agenda tu cita</h1>
+    </div>
+
       {/* InlineWidget Calendly */}
       <div>
         <InlineWidget url="https://calendly.com/blacknereus/30min" />

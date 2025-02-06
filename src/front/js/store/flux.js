@@ -14,6 +14,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			selectedCita: null,
 		},
 		actions: {
+			setAuthState: (token, id) => {
+				setStore({ token: token, id: id });
+			  },
+			  
 			getUserData: async () => {
 				try {
 					console.log("Ejecutando getUserData")
@@ -70,6 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
+
 			loginUser: async (formData) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/login", {
@@ -82,9 +87,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const errorData = await response.json();
 						throw new Error(errorData.message || "Credenciales incorrectas");
 					}
-
+					
 					const data = await response.json();
-
+					
 					localStorage.setItem("token", data.token);
 					localStorage.setItem("id", data.user.id);
 					setStore({ auth: true, token: data.token , id: data.user.id});
@@ -343,6 +348,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ selectedCita: data.data, loading: false });
 				} catch (error) {
 					console.error("Error obteniendo la cita por ID:", error);
+					setStore({
+						selectedCita: [], // En caso de error, usa un array vacío
+						loading: false, // Desactiva el estado de carga
+					  });
 				}
 			},
 
@@ -424,6 +433,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			logout: () => {
+				localStorage.removeItem("id");
 				localStorage.removeItem("token"); // Elimina el token del localStorage
 				setStore({ auth: false, token: null }); // Actualiza el estado global
 			},

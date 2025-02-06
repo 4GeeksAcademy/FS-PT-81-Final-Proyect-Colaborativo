@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
@@ -68,7 +70,7 @@ export const Perfil = () => {
                   <button type="submit" className="btn btn-primary btn-lg">
                     Actualizar Perfil
                   </button>
-                  <button className="btn btn-primary" onClick={() => handleDeleteUser()}>
+                  <button className="btn btn-outline-danger btn-lg" onClick={() => handleDeleteUser()}>
                     Eliminar cuenta
                   </button>
                 </div>
