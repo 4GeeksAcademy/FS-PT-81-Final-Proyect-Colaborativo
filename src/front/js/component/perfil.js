@@ -38,6 +38,9 @@ export const Perfil = () => {
       <h2>Editar Perfil</h2>
       <form onSubmit={handleSubmit}>
 
+      <h2>Editar Perfil</h2>
+      <form onSubmit={handleSubmit}>
+
         <div className="mb-3">
           <label>Nombre</label>
           <input
@@ -45,12 +48,14 @@ export const Perfil = () => {
             className="form-control"
             name="name"
             value={userData.name}
+            value={userData.name}
             onChange={handleChange}
             required
           />
         </div>
 
 
+        <button type="submit" className="btn btn-primary">
         <button type="submit" className="btn btn-primary">
           Actualizar
         </button>
