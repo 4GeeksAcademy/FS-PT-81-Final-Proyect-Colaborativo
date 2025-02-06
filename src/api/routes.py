@@ -215,9 +215,9 @@ def get_cita():
    return jsonify ({"msg":"Ok", "data":citas}), 200
 
 @api.route('/citas/<int:id>', methods=['GET'])
-def one_cita(user_id):
+def one_cita(id):
    try:
-        citas = GestorCitas.query.filter_by(user_id=user_id).all()
+        citas = GestorCitas.query.filter_by(user_id=id).all()
         if not citas:
             return jsonify({"msg": f"No se encontraron citas para el usuario con ID {user_id}"}), 404
         citas_serializadas = [cita.serialize() for cita in citas]

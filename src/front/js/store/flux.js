@@ -20,7 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const token = localStorage.getItem("token")
 					console.log("Token",token)
 					
-					const resp = await fetch(`${process.env.BACKEND_URL}/api/user`, {
+					const resp = await fetch(`${process.env.BACKEND_URL}api/user`, {
 						method: 'GET',
 						headers: {
 							'Authorization': `Bearer ${token}`,
@@ -48,7 +48,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			register: async (formData) => {				
 				try {
-					const resp = await fetch(process.env.BACKEND_URL + '/api/register', {
+					const resp = await fetch(process.env.BACKEND_URL + 'api/register', {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'

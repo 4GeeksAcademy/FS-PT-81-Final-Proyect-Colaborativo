@@ -10,13 +10,15 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Registro } from "./pages/registro.jsx";
 import { Login } from "./pages/login.jsx";
-import  Cita  from "./pages/cita.jsx";
-import  {Calendars} from "./component/calendar.js";
+import Cita from "./pages/cita.jsx";
+import { Calendars } from "./component/calendar.js";
 import { DoctorCards } from "./component/doctorCard.js";
 import { RegistroEmpresas } from "./pages/registroEmpresa.jsx";
 import { BotonElegir } from "./pages/botonElegir.jsx";
 import { Cuentas } from "./pages/cuenta.jsx";
 import { PerfilEmpresa } from "./pages/perfilEmpresa.jsx"
+import { PerfilCliente } from "./pages/perfilcliente.jsx";
+
 
 
 
@@ -43,8 +45,9 @@ const Layout = () => {
                         <Route element={<Cita />} path="/cita" />
                         <Route element={<Cuentas />} path="cuenta" />
                         <Route element={<Calendars />} path="/calendar/:doctorId" />
+                        <Route element={<PerfilCliente/>} path="/perfilcliente" />
                         <Route element={<PerfilEmpresa />} path="/perfilempresa" />
-                        <Route element={<DoctorCards />}  path="/doctors" />
+                        <Route element={<DoctorCards />} path="/doctors" />
                         <Route element={<Calendars />} path="/calendar/:doctorId" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
