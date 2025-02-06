@@ -17,7 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setAuthState: (token, id) => {
 				setStore({ token: token, id: id });
 			  },
-			  
+
 			getUserData: async () => {
 				try {
 					console.log("Ejecutando getUserData")
@@ -148,22 +148,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			deleteUser: async (id) => {
-                try {
-                    const response = await fetch(`${process.env.BACKEND_URL}/api/users/${id}`, {
-                        method: "DELETE",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization":`Bearer ${localStorage.getItem("token")}`
-                        }
-                    });
-                    if (!response.ok) throw new Error("Error borrando al usuario");
-                    const store = getStore();
-                    setStore({ users: store.users.filter((user) => user.id !== id) });
-                } catch (error) {
-                    console.error("Error Borrando al usuario:", error);
-
-                }
-            },
+				try {
+				  const response = await fetch(`${process.env.BACKEND_URL}/api/users/${id}`, {
+					method: "DELETE",
+				  });
+			  
+				  console.log("Respuesta de la API en deleteUser:", response); 
+			  
+				  if (!response.ok) {
+					throw new Error("Error borrando al usuario");
+				  }
+				  const store = getStore();
+				  setStore({ users: store.users.filter((user) => user.id !== id) });
+			  
+				  return response; 
+				} catch (error) {
+				  console.error("Error Borrando al usuario:", error);
+				  throw error; 
+				}
+			  },
 			
 			updateUser: async (id, email, password) => {
 				try {

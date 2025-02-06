@@ -31,8 +31,10 @@ export const Perfil = () => {
     const userId = store.user.id;
     try {
       const response = await actions.deleteUser(userId);
+      console.log("Respuesta de la API en handleDeleteUser:", response); 
       if (response.ok) {
-        navigate("/");
+        await actions.logout();
+        navigate("/"); 
       } else {
         console.error("No se pudo eliminar el usuario:", response);
       }
