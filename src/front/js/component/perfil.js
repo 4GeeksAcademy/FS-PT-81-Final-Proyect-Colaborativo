@@ -10,7 +10,6 @@ export const Perfil = () => {
     name: store.user?.name || ""
   });
 
- 
 
   useEffect(() => {
     actions.getUserData();
@@ -38,16 +37,12 @@ export const Perfil = () => {
       <h2>Editar Perfil</h2>
       <form onSubmit={handleSubmit}>
 
-      <h2>Editar Perfil</h2>
-      <form onSubmit={handleSubmit}>
-
         <div className="mb-3">
           <label>Nombre</label>
           <input
             type="text"
             className="form-control"
             name="name"
-            value={userData.name}
             value={userData.name}
             onChange={handleChange}
             required
@@ -56,8 +51,10 @@ export const Perfil = () => {
 
 
         <button type="submit" className="btn btn-primary">
-        <button type="submit" className="btn btn-primary">
           Actualizar
+        </button>
+        <button  className="btn btn-primary">
+         Eliminar Usuario
         </button>
       </form>
     </div>

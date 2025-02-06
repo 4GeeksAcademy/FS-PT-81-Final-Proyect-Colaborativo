@@ -24,7 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw new Error("ID del usuario no encontrado en localStorage.");
 					}
 
-					const resp = await fetch(`${process.env.BACKEND_URL}api/user`, {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/user`, {
 						method: 'GET',
 						headers: {
 							'Authorization': `Bearer ${token}`,
@@ -50,10 +50,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error(error);
 				}
 			},
-			
-			register: async (formData) => {				
+			register: async (formData) => {
 				try {
-					const resp = await fetch(process.env.BACKEND_URL + 'api/register', {
+					const resp = await fetch(process.env.BACKEND_URL + '/api/register', {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'
@@ -73,8 +72,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false
 				}
 			},
-
-
 			loginUser: async (formData) => {
 				try {
 					const response = await fetch(process.env.BACKEND_URL + "/api/login", {
@@ -434,11 +431,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			editarPerfil: async (updatedData) => {
-				const id = localStorage.getItem("id")
+				const id = localStorage.getItem("id");
+				if (!id) {
+					console.error("No se encontró el ID del usuario en localStorage");
+					return false;
+				}
+			
 				try {
-					console.log(id)
-					console.log(updatedData)
-					const response = await fetch(`${process.env.BACKEND_URL}api/user/${id}`, {
+					console.log("ID del usuario:", id);
+					console.log("Datos a actualizar:", updatedData);
+			
+					const response = await fetch(`${process.env.BACKEND_URL}/api/user/${id}`, {
 						method: "PUT",
 						headers: {
 							"Content-Type": "application/json",
@@ -446,21 +449,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 						},
 						body: JSON.stringify(updatedData)
 					});
+			
 					if (!response.ok) {
-						throw new Error("Error actualizando perfil");
+						console.error("Error en la respuesta del servidor:", response.status, response.statusText);
+						return false;
 					}
-					const data = await response.json();
-					const store = getStore();
+			
+					let data;
+					try {
+						data = await response.json();
+					} catch {
+						console.error("Error al parsear la respuesta del servidor");
+						return false;
+					}
+			
+					const { user } = getStore();
 					setStore({
-						user: { ...store.user, ...data.user }  // Actualizar objeto directamente
+						user: { ...user, ...data.user }  // Mantiene la estructura actualizada del usuario
 					});
-					console.log("Perfil actualizado:", data);
+			
+					console.log("Perfil actualizado correctamente:", data);
 					return true;
+			
 				} catch (error) {
-					console.error("Error actualizando el perfil:", error);
+					console.error("Error al actualizar el perfil:", error);
 					return false;
 				}
-			},
+			}
 		},
 	}
 };
