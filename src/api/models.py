@@ -14,6 +14,7 @@ class Users(db.Model):
 
     def __repr__(self):
         return f'<Users {self.email}>'
+            
 
     def serialize(self):
         return {

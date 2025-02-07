@@ -1,0 +1,34 @@
+Explicación del proceso
+
+Sitio web diseñado para la gestión de citas, permitiendo a los usuarios registrarse, iniciar sesión y administrar sus citas de manera eficiente. Este proyecto hace uso de las siguientes tecnologías:
+
+Calendly (para la programación y gestión de citas)
+SQLAlchemy (gestión y almacenamiento de datos en base de datos SQL)
+HTML, CSS, JSX y JavaScript (estructura y funcionalidad del sitio web)
+Bootstrap (diseño responsivo y estilización)
+El sistema permite a los usuarios:
+✅ Registrarse e iniciar sesión de forma segura
+✅ Agendar, modificar y cancelar citas a través de Calendly
+✅ Visualizar sus citas de manera organizada
+✅ Interfaz moderna y adaptable con Bootstrap
+
+Compilar el código
+
+Icono de remote explorer y seleccionar open browser en el puerto 3000.
+
+Instalar las dependencias necesarias:
+$ npm install
+$ pipenv install
+Start coding!
+
+Para Windows, Mac, Linux o Gitpod, iniciar el servidor con live reload:
+
+$ npm run start --> Para el front
+$ pipenv run start --> Para el back
+
+✅ Ponerte en la rama de cal2 que es la main de todo ✅ 
+
+
+Autores
+
+Iván, Andrés, Joan y Maikel

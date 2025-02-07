@@ -11,7 +11,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 api = Blueprint('api', __name__)
 
 
-# Allow CORS requests to this API
+
+
 CORS(api)
 
 
@@ -30,16 +31,20 @@ def one_user():
         return jsonify({"msg": f"No user found with email {exist.email}, the database might be empty"}), 404
    return jsonify({"msg": "one user with email:" + str(email), "user": exist.serialize()}), 200
 
+
 @api.route('/users', methods=['POST'])
 def create_user():
    email = request.json.get('email', None)
    password = request.json.get('password', None)
-   if not email or not password:
+   name = request.json.get('name', None)
+   if not email or not password or not name:
       return jsonify ({"msg":"All fields is required"}), 400
    check = Users.query.filter_by(email=email).first()
    if check:
       return jsonify ({"msg":"User already exist"}), 400
-   new_user = Users(email=email, password=password, is_active=True)
+
+   new_user = Users(email=email, password=password, name=name, is_active=True)
+
    db.session.add(new_user)
    db.session.commit()
    return jsonify({"msg": "OK", "data": new_user.serialize()}), 201
@@ -53,12 +58,7 @@ def delete_user(id):
    db.session.commit()
    return jsonify({"msg": "deleted user with id:" + str(id)}), 200
 
-@api.route('/user/<int:id>', methods=['PUT'])
-def update_user(id):
-   user = Users.query.get(id)
-   if user is None:
-    return jsonify ({"msg":"no user found with id:" + str(id)}), 404
-   data = request.json
+
    email = data.get('email')
    password  =data.get('password')
    name = data.get('name')
@@ -76,7 +76,10 @@ def update_user(id):
 
    return jsonify ({"msg": "User with id {id} updated successfully", "user": user.serialize()}), 200
 
+
    
+
+
 @api.route('/company', methods=['GET'])
 def get_company():
    data = Empresa.query.all()
@@ -174,7 +177,6 @@ def create_service():
     # Guardar en la base de datos
     db.session.add(new_service)
     db.session.commit()
-
     # Retornar respuesta
     return jsonify({"msg": "Servicio creado exitosamente", "data": new_service.serialize()}), 201
 
@@ -305,16 +307,18 @@ def login():
     exist = Users.query.filter_by(email=email).first()
     if not exist:
         return jsonify({"msg": "user doesnt exist"}), 400
+
     check_password_hash(exist.password, password)
     if not check_password_hash:
         return jsonify({"msg": "Incorrect password"}), 400
     token = create_access_token(identity=exist.email)
+
     return jsonify({"msg": 'ok', 'token': token, "user": exist.serialize()})
 
 @api.route('/protected', methods=['GET'])
 @jwt_required()
 def protected():
-    identity = get_jwt_identity()
-    print('user identity->', identity)
+    id = get_jwt_identity()
+    print('user identity->', id)
     user = Users.query.get(id)
     return jsonify({"msg":"OK", "user": user.serialize()})

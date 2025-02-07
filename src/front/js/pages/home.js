@@ -11,14 +11,14 @@ import "../../styles/home.css";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate();
-	
-	  const handleAgendarCita = () => {
-		if(!store.auth){
-		  navigate("/login", {state: {from:"/doctors"}})
-		}else {
-		  navigate("/doctors")
+
+	const handleAgendarCita = () => {
+		if (!store.auth) {
+			navigate("/login", { state: { from: "/doctors" } })
+		} else {
+			navigate("/doctors")
 		}
-	  }
+	}
 
 	return (
 		<>
@@ -89,6 +89,8 @@ export const Home = () => {
 						<div className="card-body">
 							<p className="card-text">UÑAS</p>
 							<p>Embellece tus manos con nuestros servicios de manicura y pedicura. Diseños personalizados, esmaltes de alta calidad y un toque único para tus uñas.</p>
+
+			
 						</div>
 					</div>
 				</div>
@@ -125,6 +127,7 @@ export const Home = () => {
 								<div className="error" id="telefonoError"></div>
 							</div>
 
+
 							<div className="form-group">
 								<label htmlFor="email">Email:</label>
 								<input type="email" id="email" name="email" required />
@@ -139,6 +142,7 @@ export const Home = () => {
 
 							<button className="btn btn-outline-primary">Enviar</button>
 						</form>
+
 					</div>
 				</div>
 			</div>

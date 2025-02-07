@@ -7,15 +7,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
+  const navigate = useNavigate()
   const [userData, setUserData] = useState({
     name: store.user?.name || ""
   });
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     actions.getUserData();
-  }, []);
+  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,6 +23,7 @@ export const Perfil = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     actions.editarPerfil(userData);
     navigate("/cuenta");
   };
@@ -43,14 +43,25 @@ export const Perfil = () => {
     }
   };
 
+  console.log(store.user);
   return (
     <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-8 col-lg-6">
-          <div className="card shadow-lg border-0 rounded-lg">
-            <div className="card-body">
-              <h2 className="text-center mb-4">Editar Perfil</h2>
-
+      <h2>Editar Perfil</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <h3>Bienvenido, {store.user?.name || "Usuario"}</h3> {/* Mostrar el nombre del usuario */}
+        </div>
+        <div className="mb-3">
+          <label>Nombre</label>
+          <input
+            type="text"
+            className="form-control"
+            name="name"
+            value={userData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">

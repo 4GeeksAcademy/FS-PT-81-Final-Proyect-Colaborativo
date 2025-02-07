@@ -178,7 +178,7 @@ body {
 }
 
 .navbar {
-  background-color: #2C5364;
+  background-color: #373B44;
   padding: 10px 20px;
   display: flex;
   align-items: center;
@@ -210,7 +210,7 @@ body {
 
 /* Footer 2*/
 .footer {
-  background: #2d2d2d;
+  background: #373B44;
   color: white;
   padding: 2rem 1rem;
 }
@@ -269,42 +269,20 @@ body {
   }
 }
 
+
 .enlacefooter {
   text-decoration: none;
 }
 
-
-/*FOOTER
-.footer {
-  background-color: #2C5364;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  color: white;
+.textoformulario{
+  color: #000;
+  margin: 0;
 }
 
-.container-footer {
-  display: flex;
-  justify-content: space-between; 
-  align-items: center; 
-  gap: 20px; 
+.btnformulario{
+  padding: 0;
 }
 
-.nav-link {
-  text-decoration: none; 
-  font-size: 16px; 
-}
-
-.nav-link:hover {
-  color: white; 
-}
-  */
-
-/*BOTONES DEL Navbar*/
-
-
-/* Estilos de Home.js */
 .jumbotron_div {
   display: flex;
   flex-direction: column;
@@ -366,6 +344,7 @@ body {
   margin: auto;
   padding: 20px;
   background-color: #ffffff;
+
 }
 
 .form-group {
@@ -374,9 +353,7 @@ body {
 
 label {
   display: block;
-  margin-bottom: 5px;
-}
-
+  margin-bottom: 5px
 input, textarea {
   width: 100%;
   padding: 8px;
@@ -619,4 +596,5 @@ input, textarea {
   .form-group textarea {
     font-size: 14px; /* Reduce el tamaño de la fuente en móviles */
   }
+
 }
