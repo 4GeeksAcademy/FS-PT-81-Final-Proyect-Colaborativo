@@ -25,6 +25,10 @@ Para Windows, Mac, Linux o Gitpod, iniciar el servidor con live reload:
 
 $ npm run start --> Para el front
 $ pipenv run start --> Para el back
+
+✅ Ponerte en la rama de cal2 que es la main de todo ✅ 
+
+
 Autores
 
 Iván, Andrés, Joan y Maikel
